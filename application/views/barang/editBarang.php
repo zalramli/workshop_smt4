@@ -70,7 +70,7 @@
 
             </div>
             <button type="submit" class="btn btn-primary">Simpan</button>
-            <a href="<?php echo base_url() . 'kategori'; ?>" class="btn btn-danger">Kembali</a>
+            <a href="<?php echo base_url() . 'barang'; ?>" class="btn btn-danger">Kembali</a>
         </form>
     </div>
 </div>

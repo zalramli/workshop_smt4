@@ -23,7 +23,10 @@ class Api extends REST_Controller
             $this->db->where('tbl_barang', $id);
             $kontak = $this->db->get('tbl_barang')->result();
         }
-        $this->response($kontak, 200);
+        $this->response([
+            'status' => true,
+            'data' => $kontak
+        ], 200);
     }
 
     function index_post()
