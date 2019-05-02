@@ -17,16 +17,16 @@ class Kategori extends CI_Controller
     }
     public function add()
     {
+        $data['kode'] = $this->m_kategori->buat_kode();
         $this->load->view('template/header');
         $this->load->view('template/navbar');
-        $this->load->view('kategoriBarang/inputKategori');
+        $this->load->view('kategoriBarang/inputKategori', $data);
         $this->load->view('template/footer');
     }
     public function store()
     {
         $id_kategori = $this->input->post('id_kategori');
         $nama_kategori = $this->input->post('nama_kategori');
-
         $data = array(
             'id_kategori' => $id_kategori,
             'nama_kategori' => $nama_kategori

@@ -24,13 +24,13 @@ class M_barang extends CI_Model
         return $this->db->get('tbl_barang');
     }
     public function tampil_kategori()
-	{
-		return $this->db->get('tbl_kategori');
+    {
+        return $this->db->get('tbl_kategori');
     }
     public function tampil_merk()
-	{
-		return $this->db->get('tbl_merk');
-	}
+    {
+        return $this->db->get('tbl_merk');
+    }
     function input_data($data, $table)
     {
         $this->db->insert($table, $data);

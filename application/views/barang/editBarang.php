@@ -5,7 +5,7 @@
         <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
     </div>
     <div class="container-fluid">
-        <form class="" method="post" action="<?php echo base_url() . 'barang/store'; ?>" enctype="multipart/form-data">
+        <form class="" method="post" action="<?php echo base_url() . 'barang/update'; ?>" enctype="multipart/form-data">
             <div class="form-group row">
                 <div class="col-sm-6 mb-3 mb-sm-0">
                     <label for="exampleInputEmail1">ID Barang</label>
