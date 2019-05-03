@@ -59,7 +59,7 @@
         </div>
 
         <!-- Nav Item - Pages Collapse Menu -->
-        <li class="nav-item <?php if ($this->uri->segment(1) == "kategori") {
+        <li class="nav-item <?php if ($this->uri->segment(1) === "barang" || "kategori" || "merk") {
                                 echo "active";
                             } ?>">
             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true" aria-controls="collapsePages">
@@ -70,12 +70,14 @@
                 <div class="bg-white py-2 collapse-inner rounded">
                     <h6 class="collapse-header">Login Screens:</h6>
                     <a class="collapse-item" href="<?= base_url() ?>kategori">Kategori Barang</a>
-                    <a class=" collapse-item" href=""">Merk Barang</a>
-                    <a class=" collapse-item" href=""">Daftar Barang</a>
+                    <a class=" collapse-item" href="<?= base_url() ?>merk">Merk Barang</a>
+                    <a class=" collapse-item" href="<?= base_url() ?>barang"">Daftar Barang</a>
                 </div>
             </div>
         </li>
-        <li class=" nav-item">
+        <li class=" nav-item <?php if ($this->uri->segment(1) === "pegawai") {
+                                    echo "active";
+                                } ?>">
                         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages1" aria-expanded="true" aria-controls="collapsePages">
                             <i class="fas fa-fw fa-folder"></i>
                             <span>Pegawai</span>
@@ -83,20 +85,24 @@
                         <div id="collapsePages1" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                             <div class="bg-white py-2 collapse-inner rounded">
                                 <h6 class="collapse-header">Login Screens:</h6>
-                                <a class="collapse-item" href="">Daftar Jabatan</a>
-                                <a class=" collapse-item" href=""">Daftar Pegawai</a>
-                </div>
-            </div>
+                                <a class="collapse-item" href="<?= base_url() ?>jabatan">Daftar Jabatan</a>
+                                <a class=" collapse-item" href="<?= base_url() ?>pegawai">Daftar Pegawai</a>
+                            </div>
+                        </div>
         </li>
 
         <!-- Nav Item - Charts -->
-        <li class=" nav-item">
-                                    <a class="nav-link" href="charts.html">
-                                        <i class="fas fa-fw fa-chart-area"></i>
-                                        <span>Pelanggan</span></a>
+        <li class="nav-item <?php if ($this->uri->segment(1) == "pelanggan") {
+                                echo "active";
+                            } ?>">
+            <a class="nav-link" href="<?= base_url() ?>pelanggan">
+                <i class="fas fa-fw fa-chart-area"></i>
+                <span>Pelanggan</span></a>
         </li>
-        <li class=" nav-item">
-            <a class="nav-link" href="charts.html">
+        <li class="nav-item <?php if ($this->uri->segment(1) == "akun") {
+                                echo "active";
+                            } ?>">
+            <a class="nav-link" href="<?= base_url() ?>akun ">
                 <i class="fas fa-fw fa-chart-area"></i>
                 <span>Akun</span></a>
         </li>
