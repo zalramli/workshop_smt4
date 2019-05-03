@@ -32,20 +32,26 @@
         </div>
 
         <!-- Nav Item - Pages Collapse Menu -->
-        <li class="nav-item">
-            <a class="nav-link" href="">
+        <li class="nav-item <?php if ($this->uri->segment(1) == "pemesanan") {
+                                echo "active";
+                            } ?>">
+            <a class="nav-link" href="<?= base_url() ?>pemesanan">
                 <i class="fas fa-fw fa-tachometer-alt"></i>
                 <span>Pemesanan</span></a>
         </li>
-        <li class="nav-item">
-            <a class="nav-link" href="">
+        <li class="nav-item <?php if ($this->uri->segment(1) == "transaksi") {
+                                echo "active";
+                            } ?>">
+            <a class="nav-link" href=" <?= base_url() ?>transaksi">
                 <i class="fas fa-fw fa-tachometer-alt"></i>
                 <span>Transaksi</span></a>
         </li>
 
         <!-- Nav Item - Utilities Collapse Menu -->
-        <li class="nav-item">
-            <a class="nav-link" href="">
+        <li class="nav-item <?php if ($this->uri->segment(1) == "laporan") {
+                                echo "active";
+                            } ?>">
+            <a class="nav-link" href="<?= base_url() ?>laporan">
                 <i class="fas fa-fw fa-tachometer-alt"></i>
                 <span>Laporan</span></a>
         </li>
@@ -59,7 +65,11 @@
         </div>
 
         <!-- Nav Item - Pages Collapse Menu -->
-        <li class="nav-item <?php if ($this->uri->segment(1) === "barang" || "kategori" || "merk") {
+        <li class="nav-item <?php if ($this->uri->segment(1) === "barang") {
+                                echo "active";
+                            } else if ($this->uri->segment(1) === "kategori") {
+                                echo "active";
+                            } else if ($this->uri->segment(1) === "merk") {
                                 echo "active";
                             } ?>">
             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true" aria-controls="collapsePages">
@@ -75,7 +85,9 @@
                 </div>
             </div>
         </li>
-        <li class=" nav-item <?php if ($this->uri->segment(1) === "pegawai") {
+        <li class=" nav-item <?php if ($this->uri->segment(1) === "jabatan") {
+                                    echo "active";
+                                } else if ($this->uri->segment(1) === "pegawai") {
                                     echo "active";
                                 } ?>">
                         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages1" aria-expanded="true" aria-controls="collapsePages">
