@@ -1,22 +1,17 @@
 <?php
 class M_kasir extends CI_Model
 {
-
-	function get_all_blog()
+	function getKategori()
 	{
-		$result = $this->db->get('tbl_barang');
-		return $result;
+		$query = $this->db->get('tbl_kategori');
+		return $query->result_array();
 	}
-
-	function search_blog($title)
+	public function get_produk_kategori($kategori)
 	{
-		$this->db->like('id_barang', $title, 'both');
-		$this->db->order_by('id_barang', 'ASC');
-		$this->db->limit(10);
-		return $this->db->get('tbl_barang')->result();
-	}
-	function getBarang()
-	{
-		return $this->db->query("SELECT * FROM tbl_barang JOIN tbl_kategori USING (id_kategori) JOIN tbl_merk USING(id_merk)");
+		if ($kategori > 0) {
+			$this->db->where('id_kategori', $kategori);
+		}
+		$query = $this->db->get('tbl_barang');
+		return $query;
 	}
 }

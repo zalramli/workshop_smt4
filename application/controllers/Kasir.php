@@ -5,11 +5,13 @@ class Kasir extends CI_Controller
     {
         parent::__construct();
         $this->load->model('m_kasir');
-        error_reporting(0);
     }
+
     public function index()
     {
-        $data['barang'] = $this->m_kasir->getBarang()->result();
+        $kategori = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
+        $data['produk'] = $this->m_kasir->get_produk_kategori($kategori)->result();
+        $data['kategori'] = $this->m_kasir->getKategori();
         $this->load->view('kasir/home', $data);
     }
     function get_autocomplete()

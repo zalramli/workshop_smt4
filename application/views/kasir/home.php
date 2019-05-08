@@ -40,12 +40,15 @@
         <div class="row">
             <div class="col-3">
                 <div class="list-group">
-                    <a href="#" class="list-group-item list-group-item-action active">
-                        <i class="fas fa-laptop"></i> All
-                    </a>
-                    <a href="#" class="list-group-item list-group-item-action"><i class="fas fa-laptop"></i> Laptop</a>
-                    <a href="#" class="list-group-item list-group-item-action"><i class="fas fa-laptop"></i> Smartphone</a>
-                    <a href="#" class="list-group-item list-group-item-action"><i class="fas fa-laptop"></i> Aksesoris</a>
+                    <a class="list-group-item"><strong>KATEGORI</strong></a>
+                    <a href="<?php echo base_url() ?>kasir/index/" class="list-group-item">Semua</a>
+                    <?php
+                    foreach ($kategori as $row) {
+                        ?>
+                        <a href="<?php echo base_url() ?>kasir/index/<?php echo $row['id_kategori']; ?>" class="list-group-item"><?php echo $row['nama_kategori']; ?></a>
+                    <?php
+                }
+                ?>
                 </div>
             </div>
             <div class="col-9">
@@ -57,11 +60,11 @@
                 </div>
                 <div class=" row mt-3">
                         <?php
-                        foreach ($barang as $item) {
+                        foreach ($produk as $item) {
                             ?>
                             <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
                                 <div class="card">
-                                    <img width="100px" height="160px" class="card-img-top" src="uploads/<?= $item->foto ?>" alt="Card image cap">
+                                    <img width="100px" height="160px" class="card-img-top" src="<?= base_url() . 'uploads/' . $item->foto ?>" alt="Card image cap">
                                     <div class="card-body">
                                         <h5 class="card-title text-center"><?= $item->nama_barang ?></h5>
                                         <p class="card-text">
