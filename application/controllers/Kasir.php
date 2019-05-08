@@ -9,7 +9,8 @@ class Kasir extends CI_Controller
     }
     public function index()
     {
-        $this->load->view('kasir/home');
+        $data['barang'] = $this->m_kasir->getBarang()->result();
+        $this->load->view('kasir/home', $data);
     }
     function get_autocomplete()
     {
@@ -27,6 +28,7 @@ class Kasir extends CI_Controller
     }
     public function barang()
     {
-        $this->load->view("kasir/barang");
+        $data['barang'] = $this->m_kasir->getBarang()->result();
+        $this->load->view("kasir/barang", $data);
     }
 }

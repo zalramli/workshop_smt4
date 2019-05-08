@@ -15,4 +15,8 @@ class M_kasir extends CI_Model
 		$this->db->limit(10);
 		return $this->db->get('tbl_barang')->result();
 	}
+	function getBarang()
+	{
+		return $this->db->query("SELECT * FROM tbl_barang JOIN tbl_kategori USING (id_kategori) JOIN tbl_merk USING(id_merk)");
+	}
 }

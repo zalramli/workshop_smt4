@@ -82,157 +82,33 @@
     <div class="container-fluid">
         <div class="row mt-5">
             <div class="col-md-12">
-                <table class="table table-hover table-bordered data">
+                <table class="table table-hover table-bordered data" width="100%">
                     <thead>
                         <tr>
-                            <th>Nama</th>
-                            <th>Alamat</th>
-                            <th>Pekerjaan</th>
-                            <th>Usia</th>
-                            <th>Status</th>
+                            <th style="background-color:#4285F4;color:white;text-align:center;">KODE</th>
+                            <th style="background-color:#4285F4;color:white;text-align:center;">KATEGORI</th>
+                            <th style="background-color:#4285F4;color:white;text-align:center;">MERK</th>
+                            <th style="background-color:#4285F4;color:white;text-align:center;">NAMA</th>
+                            <th style="background-color:#4285F4;color:white;text-align:center;">STOK</th>
+                            <th style="background-color:#4285F4;color:white;text-align:center;">HARGA</th>
+                            <th style="background-color:#4285F4;color:white;text-align:center;" width="10%">FOTO</th>
+
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>Andi</td>
-                            <td>Jakarta</td>
-                            <td>Web Designer</td>
-                            <td>21</td>
-                            <td>Aktif</td>
-                        </tr>
-                        <tr>
-                            <td>Malas Ngoding</td>
-                            <td>Bandung</td>
-                            <td>Web Developer</td>
-                            <td>26</td>
-                            <td>Aktif</td>
-                        </tr>
-                        <tr>
-                            <td>Malas Ngoding</td>
-                            <td>Bandung</td>
-                            <td>Web Developer</td>
-                            <td>26</td>
-                            <td>Aktif</td>
-                        </tr>
-                        <tr>
-                            <td>Andi</td>
-                            <td>Jakarta</td>
-                            <td>Web Designer</td>
-                            <td>21</td>
-                            <td>Aktif</td>
-                        </tr>
-                        <tr>
-                            <td>Andi</td>
-                            <td>Jakarta</td>
-                            <td>Web Designer</td>
-                            <td>21</td>
-                            <td>Aktif</td>
-                        </tr>
-                        <tr>
-                            <td>Andi</td>
-                            <td>Jakarta</td>
-                            <td>Web Designer</td>
-                            <td>21</td>
-                            <td>Aktif</td>
-                        </tr>
-                        <tr>
-                            <td>Andi</td>
-                            <td>Jakarta</td>
-                            <td>Web Designer</td>
-                            <td>21</td>
-                            <td>Aktif</td>
-                        </tr>
-                        <tr>
-                            <td>Andi</td>
-                            <td>Jakarta</td>
-                            <td>Web Designer</td>
-                            <td>21</td>
-                            <td>Aktif</td>
-                        </tr>
-                        <tr>
-                            <td>Andi</td>
-                            <td>Jakarta</td>
-                            <td>Web Designer</td>
-                            <td>21</td>
-                            <td>Aktif</td>
-                        </tr>
-                        <tr>
-                            <td>Andi</td>
-                            <td>Jakarta</td>
-                            <td>Web Designer</td>
-                            <td>21</td>
-                            <td>Aktif</td>
-                        </tr>
-                        <tr>
-                            <td>Andi</td>
-                            <td>Jakarta</td>
-                            <td>Web Designer</td>
-                            <td>21</td>
-                            <td>Aktif</td>
-                        </tr>
-                        <tr>
-                            <td>Andi</td>
-                            <td>Jakarta</td>
-                            <td>Web Designer</td>
-                            <td>21</td>
-                            <td>Aktif</td>
-                        </tr>
-                        <tr>
-                            <td>Andi</td>
-                            <td>Jakarta</td>
-                            <td>Web Designer</td>
-                            <td>21</td>
-                            <td>Aktif</td>
-                        </tr>
-                        <tr>
-                            <td>Andi</td>
-                            <td>Jakarta</td>
-                            <td>Web Designer</td>
-                            <td>21</td>
-                            <td>Aktif</td>
-                        </tr>
-                        <tr>
-                            <td>Andi</td>
-                            <td>Jakarta</td>
-                            <td>Web Designer</td>
-                            <td>21</td>
-                            <td>Aktif</td>
-                        </tr>
-                        <tr>
-                            <td>Andi</td>
-                            <td>Jakarta</td>
-                            <td>Web Designer</td>
-                            <td>21</td>
-                            <td>Aktif</td>
-                        </tr>
-                        <tr>
-                            <td>Andi</td>
-                            <td>Jakarta</td>
-                            <td>Web Designer</td>
-                            <td>21</td>
-                            <td>Aktif</td>
-                        </tr>
-                        <tr>
-                            <td>Andi</td>
-                            <td>Jakarta</td>
-                            <td>Web Designer</td>
-                            <td>21</td>
-                            <td>Aktif</td>
-                        </tr>
-                        <tr>
-                            <td>Andi</td>
-                            <td>Jakarta</td>
-                            <td>Web Designer</td>
-                            <td>21</td>
-                            <td>Aktif</td>
-                        </tr>
-                        <tr>
-                            <td>Andi</td>
-                            <td>Jakarta</td>
-                            <td>Web Designer</td>
-                            <td>21</td>
-                            <td>Aktif</td>
-                        </tr>
+                        <?php
+                        foreach ($barang as $item) {
+                            ?>
+                            <tr>
+                                <td><?= $item->id_barang ?></td>
+                                <td><?= $item->nama_kategori ?></td>
+                                <td><?= $item->nama_merk ?></td>
+                                <td><?= $item->nama_barang ?></td>
+                                <td><?= $item->stok_real ?></td>
+                                <td><?= $item->harga ?></td>
+                                <td style="text-align:center"><img width="70" height="70" src="../uploads/<?= $item->foto ?>" alt=""></td>
+                            </tr>
+                        <?php } ?>
                     </tbody>
                 </table>
             </div>
@@ -254,7 +130,10 @@
     <script type="text/javascript" src="<?= base_url() . 'assets/mdb/js/mdb.min.js ' ?>"></script>
     <script type="text/javascript">
         $(document).ready(function() {
-            $('.data').DataTable();
+            $('.data').DataTable({
+                "scrollY": "420px",
+                "scrollCollapse": true
+            });
         });
     </script>
 </body>

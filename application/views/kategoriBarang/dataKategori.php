@@ -26,7 +26,7 @@
                                 <td><?= $item->id_kategori ?></td>
                                 <td><?= $item->nama_kategori ?></td>
                                 <td>
-                                    <a href="<?php echo base_url() . 'kategori/edit'; ?>/<?= $item->id_kategori ?>" class="btn btn-success">Edit</a>
+                                    <a href="<?= base_url() . 'kategori/edit'; ?>/<?= $item->id_kategori ?>" class="btn btn-success">Edit</a>
                                     <a href="" class="btn btn-danger">Hapus</a>
                                 </td>
                             </tr>
