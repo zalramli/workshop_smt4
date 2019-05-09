@@ -41,7 +41,7 @@
             <div class="col-3">
                 <div class="list-group">
                     <a class="list-group-item"><strong>KATEGORI</strong></a>
-                    <a href="<?php echo base_url() ?>kasir/index/" class="list-group-item">Semua</a>
+                    <a href="<?php echo base_url() ?>kasir/" class="list-group-item">Semua</a>
                     <?php
                     foreach ($kategori as $row) {
                         ?>
@@ -49,6 +49,35 @@
                     <?php
                 }
                 ?>
+                </div><br>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="list-group">
+                            <a href="<?php echo base_url() ?>kasir/tampil_cart" class="list-group-item"><strong><i class="glyphicon glyphicon-shopping-cart"></i> KERANJANG BELANJA</strong></a>
+                            <?php
+
+                            $cart = $this->cart->contents();
+
+                            // If cart is empty, this will show below message.
+                            if (empty($cart)) {
+                                ?>
+                                <a class="list-group-item">Keranjang Belanja Kosong</a>
+                            <?php
+                        } else {
+                            $grand_total = 0;
+                            foreach ($cart as $item) {
+                                $grand_total += $item['subtotal'];
+                                ?>
+                                    <a class="list-group-item"><?php echo $item['name']; ?> (<?php echo $item['qty']; ?> x <?php echo number_format($item['price'], 0, ",", "."); ?>)=<?php echo number_format($item['subtotal'], 0, ",", "."); ?></a>
+                                <?php
+                            }
+                            ?>
+
+                            <?php
+                        }
+                        ?>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="col-9">
@@ -64,22 +93,30 @@
                             ?>
                             <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
                                 <div class="card">
-                                    <img width="100px" height="160px" class="card-img-top" src="<?= base_url() . 'uploads/' . $item->foto ?>" alt="Card image cap">
-                                    <div class="card-body">
-                                        <h5 class="card-title text-center"><?= $item->nama_barang ?></h5>
-                                        <p class="card-text">
-                                            <h5 class="text-primary">Rp. <?= $item->harga ?> </h5>
-                                        </p>
-                                        <div class="text-center">
-                                            <?php
-                                            if ($item->stok_real == 0) {
-                                                echo "<a style='text-decoration:none;' href='' class='btn btn-danger'><i class='fas fa-exclamation-circle '></i> OUT OF STOCK</a>";
-                                            } else {
-                                                echo "<a style='text-decoration:none;color:white;' href='' class='btn btn-warning'><i class='fas fa-shopping-cart '></i> ADD TO CART</a>";
-                                            }
-                                            ?>
+                                    <form action="<?php echo base_url(); ?>kasir/tambah" method="post">
+                                        <img width="100px" height="160px" class="card-img-top" src="<?= base_url() . 'uploads/' . $item['foto'] ?>" alt="Card image cap">
+                                        <div class="card-body">
+                                            <h5 class="card-title text-center"><?= $item['nama_barang'] ?></h5>
+                                            <p class="card-text">
+                                                <h5 class="text-primary">Rp. <?= $item['harga'] ?> </h5>
+                                            </p>
+                                            <div class="text-center">
+                                                <input type="hidden" name="id" value="<?php echo $item['id_barang']; ?>" />
+                                                <input type="hidden" name="name" value="<?php echo $item['nama_barang']; ?>" />
+                                                <input type="hidden" name="price" value="<?php echo $item['harga']; ?>" />
+                                                <input type="hidden" name="foto" value="<?php echo $item['foto']; ?>" />
+                                                <input type="hidden" name="qty" value="1" />
+                                                <?php
+                                                if ($item['stok_real'] == 0) {
+                                                    echo "<a style='text-decoration:none;' href='' class='btn btn-danger'><i class='fas fa-exclamation-circle '></i>  Habis</a>";
+                                                } else {
+                                                    echo "<button style='color:white;' type='submit' class='btn btn-warning'><i class='fas fa-shopping-cart '></i> Beli</button>";
+                                                }
+                                                ?>
+                                            </div>
                                         </div>
-                                    </div>
+
+                                    </form>
                                 </div>
                             </div>
                         <?php

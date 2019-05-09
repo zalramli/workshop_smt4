@@ -1,7 +1,7 @@
 <?php
 class M_kasir extends CI_Model
 {
-	function getKategori()
+	public function get_kategori_all()
 	{
 		$query = $this->db->get('tbl_kategori');
 		return $query->result_array();
@@ -12,6 +12,6 @@ class M_kasir extends CI_Model
 			$this->db->where('id_kategori', $kategori);
 		}
 		$query = $this->db->get('tbl_barang');
-		return $query;
+		return $query->result_array();
 	}
 }
