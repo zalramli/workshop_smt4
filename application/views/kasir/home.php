@@ -40,12 +40,12 @@
         <div class="row">
             <div class="col-4">
                 <div class="list-group">
-                    <a class="list-group-item"><strong>KATEGORI</strong></a>
-                    <a href="<?php echo base_url() ?>kasir/" class="list-group-item">Semua</a>
+                    <a class="list-group-item list-group-item-dark"><strong>KATEGORI</strong></a>
+                    <a style="text-decoration:none;color:black;" href="<?php echo base_url() ?>kasir/" class="list-group-item">Semua</a>
                     <?php
                     foreach ($kategori as $row) {
                         ?>
-                        <a href="<?php echo base_url() ?>kasir/index/<?php echo $row['id_kategori']; ?>" class="list-group-item"><?php echo $row['nama_kategori']; ?></a>
+                        <a style="text-decoration:none;color:black;" href="<?php echo base_url() ?>kasir/index/<?php echo $row['id_kategori']; ?>" class="list-group-item"><?php echo $row['nama_kategori']; ?></a>
                     <?php
                 }
                 ?>
@@ -53,7 +53,7 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="list-group">
-                            <a href="<?php echo base_url() ?>kasir/tampil_cart" class="list-group-item"><strong><i class="glyphicon glyphicon-shopping-cart"></i> KERANJANG BELANJA</strong></a>
+                            <a style="text-decoration:none;" href="<?php echo base_url() ?>kasir/tampil_cart" class="list-group-item list-group-item-dark"><strong><i class="fas fa-shopping-cart"></i> KERANJANG BELANJA</strong></a>
                             <?php
 
                             $cart = $this->cart->contents();

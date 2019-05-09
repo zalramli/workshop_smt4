@@ -75,7 +75,7 @@
                                     <td><?= number_format($item['price'], 0, ",", "."); ?></td>
                                     <td><input type="text" class="form-control input-sm" name="cart[<?php echo $item['id']; ?>][qty]" value="<?php echo $item['qty']; ?>" /></td>
                                     <td><?php echo number_format($item['subtotal'], 0, ",", ".") ?></td>
-                                    <td><a href="<?php echo base_url() ?>kasir/hapusCart/<?php echo $item['rowid']; ?>" class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></a></td>
+                                    <td><a href="<?php echo base_url() ?>kasir/hapusCart/<?php echo $item['rowid']; ?>" class="btn btn-sm btn-danger"><i class="fas fa-times"></i></a></td>
                                 </tr>
                             <?php } ?>
                             <tr>
@@ -108,8 +108,10 @@
             <div class="modal-content">
                 <form method="post" action="<?php echo base_url() ?>kasir/hapusCart/all">
                     <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        <h4 class="modal-title">Konfirmasi</h4>
+                        <h5 class="modal-title">Konfirmasi</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
                     </div>
                     <div class="modal-body">
                         Anda yakin mau mengosongkan Shopping Cart?

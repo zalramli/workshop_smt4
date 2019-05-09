@@ -8,10 +8,7 @@ class M_kasir extends CI_Model
 	}
 	public function get_produk_kategori($kategori)
 	{
-		if ($kategori > 0) {
-			$this->db->where('id_kategori', $kategori);
-		}
-		$query = $this->db->get('tbl_barang');
+		$query = $this->db->get_where('tbl_barang', array('id_kategori' => $kategori));
 		return $query->result_array();
 	}
 }
