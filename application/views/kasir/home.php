@@ -27,7 +27,7 @@
                     <a class="nav-link" href="#">Pemesanan</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Cart <i class='fas fa-shopping-cart '></i> <span class="badge badge-danger badge-counter">3</span></a>
+                    <a class="nav-link" href="#">Cart <i class='fas fa-shopping-cart '></i> <span class="badge badge-danger badge-counter"><?= count($this->cart->contents()); ?></span></a>
                 </li>
 
             </ul>
@@ -38,7 +38,7 @@
     </nav>
     <div class="container mt-3">
         <div class="row">
-            <div class="col-3">
+            <div class="col-4">
                 <div class="list-group">
                     <a class="list-group-item"><strong>KATEGORI</strong></a>
                     <a href="<?php echo base_url() ?>kasir/" class="list-group-item">Semua</a>
@@ -80,7 +80,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-9">
+            <div class="col-8">
                 <div class="row">
                     <div class="col-md-12">
                         <input type="text" class="form-control" placeholder="Cari Barang"">

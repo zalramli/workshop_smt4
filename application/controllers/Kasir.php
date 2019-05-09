@@ -27,4 +27,41 @@ class Kasir extends CI_Controller
         $this->cart->insert($data_produk);
         redirect('kasir');
     }
+    public function cart()
+    {
+        $this->load->view('kasir/tampil_cart');
+    }
+    public function hapusCart($rowid)
+    {
+        if ($rowid == "all") {
+            $this->cart->destroy();
+        } else {
+            $data = array(
+                'rowid' => $rowid,
+                'qty' => 0
+            );
+            $this->cart->update($data);
+        }
+        redirect('kasir/cart');
+    }
+    public function ubah_cart()
+    {
+        $cart_info = $_POST['cart'];
+        foreach ($cart_info as $id => $cart) {
+            $rowid = $cart['rowid'];
+            $price = $cart['price'];
+            $foto = $cart['foto'];
+            $amount = $price * $cart['qty'];
+            $qty = $cart['qty'];
+            $data = array(
+                'rowid' => $rowid,
+                'price' => $price,
+                'foto' => $foto,
+                'amount' => $amount,
+                'qty' => $qty
+            );
+            $this->cart->update($data);
+        }
+        redirect('kasir/cart');
+    }
 }
