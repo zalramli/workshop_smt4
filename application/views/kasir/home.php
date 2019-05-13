@@ -11,6 +11,15 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
     <title>Hello, world!</title>
 </head>
+<style>
+    .kotak {
+        padding: 10px;
+        border: 1px solid #e8e8e8;
+        margin-bottom: 15px;
+        background: #F4F4F4;
+        border-radius: 5px;
+    }
+</style>
 
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
@@ -64,11 +73,18 @@
                                 <a class="list-group-item">Keranjang Belanja Kosong</a>
                             <?php
                         } else {
+                            echo "<table width='100%' class='table'>";
+
                             $grand_total = 0;
                             foreach ($cart as $item) {
                                 $grand_total += $item['subtotal'];
                                 ?>
-                                    <a class="list-group-item"><?php echo $item['name']; ?> (<?php echo $item['qty']; ?> x <?php echo number_format($item['price'], 0, ",", "."); ?>)=<?php echo number_format($item['subtotal'], 0, ",", "."); ?></a>
+
+                                    <tr>
+                                        <td width="55%"><?php echo $item['name']; ?></td>
+                                        <td width="10%"><?php echo $item['qty']; ?></td>
+                                        <td width="35%" align="right"><?php echo number_format($item['subtotal'], 0, ",", "."); ?></td>
+                                    </tr>
                                 <?php
                             }
                             ?>
@@ -76,63 +92,95 @@
                             <?php
                         }
                         ?>
+                            <tr>
+                                <?php
+                                if ($grand_total == 0) {
+                                    echo "";
+                                } else {
+                                    echo "<td>" . number_format($grand_total, 0, ",", "."); ?>."</td>";
+                                    }
+                                    ?>
+                                    <td align="right" colspan="3"><?php echo number_format($grand_total, 0, ",", "."); ?></td>
+                                </tr>
+                                </table>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <?php
+                                        $grand_total = 0;
+                                        $cart = $this->cart->contents();
+                                        foreach ($cart as $item) {
+                                            $grand_total += $item['subtotal'];
+                                        };
+                                        if ($grand_total == 0) {
+                                            echo "";
+                                        } else {
+                                            $totals = number_format($grand_total, 0, ",", ".");
+                                            echo "<h6 style='text-align:right;margin-right:12px;'>" . "Rp. " . $totals . "</h6>";
+                                        }
+                                        ?>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-8">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <input type="text" class="form-control" placeholder="Cari Barang"">
+
+                                    </div>
+                                </div>
+                                <div class=" row mt-3">
+                            <?php
+                            foreach ($produk as $item) {
+                                ?>
+                                <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
+                                    <div class="kotak">
+                                        <form action="<?php echo base_url(); ?>kasir/tambah" method="post">
+                                            <img class="img-thumbnail card-img-top" src="<?= base_url() . 'uploads/' . $item['foto'] ?>" alt="Card image cap">
+                                            <div class="card-body">
+                                                <h5 class="card-title text-center"><?= $item['nama_barang'] ?></h5>
+                                                <p class="card-text">
+                                                    <h5 class="text-primary">Rp. <?= $item['harga'] ?> </h5>
+                                                </p>
+                                                <div class="text-center">
+                                                    <input type="hidden" name="id" value="<?php echo $item['id_barang']; ?>" />
+                                                    <input type="hidden" name="name" value="<?php echo $item['nama_barang']; ?>" />
+                                                    <input type="hidden" name="price" value="<?php echo $item['harga']; ?>" />
+                                                    <input type="hidden" name="foto" value="<?php echo $item['foto']; ?>" />
+                                                    <input type="hidden" name="qty" value="1" />
+                                                    <?php
+                                                    if ($item['stok_real'] == 0) {
+                                                        echo "<a style='text-decoration:none;' href='' class='btn btn-sm btn-dark'><i class='fas fa-search '></i>  Detail</a>
+                                                    <a style='text-decoration:none;' href='' class='btn btn-sm btn-danger'><i class='fas fa-exclamation-circle '></i>  Habis</a>";
+                                                    } else {
+                                                        echo "
+                                                    <a style='text-decoration:none;' href='' class='btn btn-sm btn-dark'><i class='fas fa-search '></i>  Detail</a>
+                                                    <button style='color:white;' type='submit' class='btn btn-sm btn-warning'><i class='fas fa-shopping-cart '></i> Beli</button>";
+                                                    }
+                                                    ?>
+                                                </div>
+                                            </div>
+
+                                        </form>
+                                    </div>
+                                </div>
+                            <?php
+                        } ?>
+
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="col-8">
-                <div class="row">
-                    <div class="col-md-12">
-                        <input type="text" class="form-control" placeholder="Cari Barang"">
-
-                    </div>
-                </div>
-                <div class=" row mt-3">
-                        <?php
-                        foreach ($produk as $item) {
-                            ?>
-                            <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
-                                <div class="card">
-                                    <form action="<?php echo base_url(); ?>kasir/tambah" method="post">
-                                        <img width="100px" height="160px" class="card-img-top" src="<?= base_url() . 'uploads/' . $item['foto'] ?>" alt="Card image cap">
-                                        <div class="card-body">
-                                            <h5 class="card-title text-center"><?= $item['nama_barang'] ?></h5>
-                                            <p class="card-text">
-                                                <h5 class="text-primary">Rp. <?= $item['harga'] ?> </h5>
-                                            </p>
-                                            <div class="text-center">
-                                                <input type="hidden" name="id" value="<?php echo $item['id_barang']; ?>" />
-                                                <input type="hidden" name="name" value="<?php echo $item['nama_barang']; ?>" />
-                                                <input type="hidden" name="price" value="<?php echo $item['harga']; ?>" />
-                                                <input type="hidden" name="foto" value="<?php echo $item['foto']; ?>" />
-                                                <input type="hidden" name="qty" value="1" />
-                                                <?php
-                                                if ($item['stok_real'] == 0) {
-                                                    echo "<a style='text-decoration:none;' href='' class='btn btn-danger'><i class='fas fa-exclamation-circle '></i>  Habis</a>";
-                                                } else {
-                                                    echo "<button style='color:white;' type='submit' class='btn btn-warning'><i class='fas fa-shopping-cart '></i> Beli</button>";
-                                                }
-                                                ?>
-                                            </div>
-                                        </div>
-
-                                    </form>
-                                </div>
-                            </div>
-                        <?php
-                    } ?>
-
-                    </div>
-                </div>
-            </div>
-        </div>
 
 
-        <!-- Optional JavaScript -->
-        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-</body>
+            <!-- Optional JavaScript -->
+            <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+            <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+            <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    </body>
 
-</html>
+    </html>
