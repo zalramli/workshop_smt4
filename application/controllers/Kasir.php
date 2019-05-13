@@ -64,4 +64,52 @@ class Kasir extends CI_Controller
         }
         redirect('kasir/cart');
     }
+    public function check_out()
+    {
+        $data['pelanggan'] = $this->m_kasir->buat_kodePelanggan();
+        $data['transaksi'] = $this->m_kasir->buat_kodeTransaksi();
+        $data['kategori'] = $this->m_kasir->get_kategori_all();
+        $this->load->view('kasir/check_out', $data);
+    }
+    public function proses_transaksi()
+    {
+        $data_pelanggan = array(
+            'id_pelanggan' => $this->input->post('id_pelanggan'),
+            'nama_pelanggan' => $this->input->post('nama'),
+            'email' => $this->input->post('email'),
+            'alamat' => $this->input->post('alamat'),
+            'no_hp' => $this->input->post('telp')
+        );
+        $grand_total = 0;
+        if ($cart = $this->cart->contents()) {
+            foreach ($cart as $item) {
+                $grand_total = $grand_total + $item['subtotal'];
+            }
+        }
+        $data_transaksi = array(
+            'id_transaksi' => $this->input->post('id_transaksi'),
+            'tanggal' => date('Y-m-d'),
+            'total_harga' => $grand_total,
+            'total_bayar' => 5000,
+            'total_kembalian' => 500,
+            'id_pegawai' => 'PGW001',
+            'id_pelanggan' => $this->input->post('id_pelanggan')
+        );
+
+        $this->m_kasir->input_data($data_pelanggan, 'tbl_pelanggan');
+        $this->m_kasir->input_data($data_transaksi, 'tbl_transaksi');
+        if ($cart = $this->cart->contents()) {
+            foreach ($cart as $item) {
+                $data_detail = array(
+                    'id_transaksi' => $this->input->post('id_transaksi'),
+                    'id_barang' => $item['id'],
+                    'qty' => $item['qty'],
+                    'total_hrg' => $item['price'] * $item['qty']
+                );
+                $this->m_kasir->input_data($data_detail, 'tbl_transaksidetail');
+            }
+        }
+        $this->cart->destroy();
+        redirect('kasir');
+    }
 }

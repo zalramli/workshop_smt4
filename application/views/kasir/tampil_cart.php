@@ -21,13 +21,13 @@
         <div class="collapse navbar-collapse" id="navbarText">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="<?= base_url() . 'kasir' ?>">Home <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Pemesanan</a>
+                    <a class="nav-link" href="<?= base_url() . 'kasir/pemesanan' ?>">Pemesanan</a>
                 </li>
                 <li class="nav-item active">
-                    <a class="nav-link" href="#">Cart <i class='fas fa-shopping-cart '></i> <span class="badge badge-danger badge-counter"><?= count($this->cart->contents()); ?></span></a>
+                    <a class="nav-link" href="<?= base_url() . 'kasir/cart' ?>">Cart <i class='fas fa-shopping-cart '></i> <span class="badge badge-danger badge-counter"><?= count($this->cart->contents()); ?></span></a>
                 </li>
 
             </ul>
@@ -42,7 +42,8 @@
             ?>
             <div class="container mt-3">
                 <div class="row">
-                    <table width="100%" class="table">
+                    <a style="color:white;" href="<?php echo base_url() ?>kasir/check_out" class='btn btn-lg btn-warning'>Proses</a><br>
+                    <table width="100%" class="table mt-3">
                         <thead class="">
                             <tr>
                                 <th width="3%" scope="col">No</th>

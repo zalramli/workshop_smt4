@@ -11,15 +11,6 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
     <title>Hello, world!</title>
 </head>
-<style>
-    .kotak {
-        padding: 10px;
-        border: 1px solid #e8e8e8;
-        margin-bottom: 15px;
-        background: #F4F4F4;
-        border-radius: 5px;
-    }
-</style>
 
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
@@ -29,13 +20,13 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarText">
             <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
+                <li class="nav-item">
                     <a class="nav-link" href="<?= base_url() . 'kasir' ?>">Home <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="<?= base_url() . 'kasir/pemesanan' ?>">Pemesanan</a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item active">
                     <a class="nav-link" href="<?= base_url() . 'kasir/cart' ?>">Cart <i class='fas fa-shopping-cart '></i> <span class="badge badge-danger badge-counter"><?= count($this->cart->contents()); ?></span></a>
                 </li>
 
@@ -45,8 +36,9 @@
             </span>
         </div>
     </nav>
+
     <div class="container mt-3">
-        <div class="row">
+        <div class="row ">
             <div class="col-4">
                 <div class="list-group">
                     <a class="list-group-item list-group-item-dark"><strong>KATEGORI</strong></a>
@@ -114,56 +106,63 @@
                     </div>
                 </div>
             </div>
-            <div class="col-8">
+            <div class="col-7 offset-1">
                 <div class="row">
                     <div class="col-md-12">
-                        <input type="text" class="form-control" placeholder="Cari Barang"">
-
-                                                        </div>
-                                                    </div>
-                                                    <div class=" row mt-3">
                         <?php
-                        foreach ($produk as $item) {
+                        $grand_total = 0;
+                        if ($cart = $this->cart->contents()) {
+                            foreach ($cart as $item) {
+                                $grand_total = $grand_total + $item['subtotal'];
+                            }
+                            echo "<h4>Total Belanja: Rp." . number_format($grand_total, 0, ",", ".") . "</h4>";
                             ?>
-                            <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
-                                <div class="kotak">
-                                    <form action="<?php echo base_url(); ?>kasir/tambah" method="post">
-                                        <img class="img-thumbnail card-img-top" src="<?= base_url() . 'uploads/' . $item['foto'] ?>" alt="Card image cap">
-                                        <div class="card-body">
-                                            <h5 class="card-title text-center"><?= $item['nama_barang'] ?></h5>
-                                            <p class="card-text">
-                                                <h5 class="text-primary">Rp. <?= $item['harga'] ?> </h5>
-                                            </p>
-                                            <div class="text-center">
-                                                <input type="hidden" name="id" value="<?php echo $item['id_barang']; ?>" />
-                                                <input type="hidden" name="name" value="<?php echo $item['nama_barang']; ?>" />
-                                                <input type="hidden" name="price" value="<?php echo $item['harga']; ?>" />
-                                                <input type="hidden" name="foto" value="<?php echo $item['foto']; ?>" />
-                                                <input type="hidden" name="qty" value="1" />
-                                                <?php
-                                                if ($item['stok_real'] == 0) {
-                                                    echo "<a style='text-decoration:none;' href='' class='btn btn-sm btn-dark'><i class='fas fa-search '></i>  Detail</a>
-                                                    <a style='text-decoration:none;' href='' class='btn btn-sm btn-danger'><i class='fas fa-exclamation-circle '></i>  Habis</a>";
-                                                } else {
-                                                    echo "
-                                                    <a style='text-decoration:none;' href='' class='btn btn-sm btn-dark'><i class='fas fa-search '></i>  Detail</a>
-                                                    <button style='color:white;' type='submit' class='btn btn-sm btn-warning'><i class='fas fa-shopping-cart '></i> Beli</button>";
-                                                }
-                                                ?>
-                                            </div>
-                                        </div>
-
-                                    </form>
+                            <center>
+                                <h2>Konfirmasi Checkout</h2>
+                            </center>
+                            <form class="form-horizontal" action="<?php echo base_url() ?>kasir/proses_transaksi" method="post" name="frmCO" id="frmCO">
+                                <input type="hidden" class="form-control" name="id_pelanggan" id="email" placeholder="Email" value="<?= $pelanggan ?>">
+                                <input type="hidden" class="form-control" name="id_transaksi" id="email" placeholder="Email" value="<?= $transaksi ?>">
+                                <div class="form-group  has-success has-feedback">
+                                    <label class="control-label col-xs-3" for="inputEmail">Email:</label>
+                                    <div class="col-xs-9">
+                                        <input type="email" class="form-control" name="email" id="email" placeholder="Email">
+                                    </div>
                                 </div>
-                            </div>
-                        <?php
-                    } ?>
+                                <div class="form-group  has-success has-feedback">
+                                    <label class="control-label col-xs-3" for="firstName">Nama :</label>
+                                    <div class="col-xs-9">
+                                        <input type="text" class="form-control" name="nama" id="nama" placeholder="Nama Lengkap">
+                                    </div>
+                                </div>
+                                <div class="form-group  has-success has-feedback">
+                                    <label class="control-label col-xs-3" for="lastName">Alamat:</label>
+                                    <div class="col-xs-9">
+                                        <input type="text" class="form-control" name="alamat" id="alamat" placeholder="Alamat">
+                                    </div>
+                                </div>
+                                <div class="form-group  has-success has-feedback">
+                                    <label class="control-label col-xs-3" for="phoneNumber">Telp:</label>
+                                    <div class="col-xs-9">
+                                        <input type="tel" class="form-control" name="telp" id="telp" placeholder="No Telp">
+                                    </div>
+                                </div>
 
+                                <div class="form-group  has-success has-feedback">
+                                    <div class="col-xs-offset-3 col-xs-9">
+                                        <button type="submit" class="btn btn-primary">Proses Order</button>
+                                    </div>
+                                </div>
+                            </form>
+                        <?php
+                    } else {
+                        echo "<h5>Shopping Cart masih kosong</h5>";
+                    }
+                    ?>
                     </div>
                 </div>
             </div>
         </div>
-
 
         <!-- Optional JavaScript -->
         <!-- jQuery first, then Popper.js, then Bootstrap JS -->
