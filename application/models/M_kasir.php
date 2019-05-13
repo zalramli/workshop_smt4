@@ -51,4 +51,17 @@ class M_kasir extends CI_Model
 	{
 		$this->db->insert($table, $data);
 	}
+	function getPemesanan()
+	{
+		$this->db->select('*');
+		$this->db->join('tbl_pelanggan', 'tbl_pemesanan.id_pelanggan = tbl_pelanggan.id_pelanggan');
+		$this->db->from('tbl_pemesanan');
+
+		$query = $this->db->get();
+		return $query->result();
+	}
+	function detailPemesanan($where, $table)
+	{
+		return $this->db->get_where($table, $where);
+	}
 }
