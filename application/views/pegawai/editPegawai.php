@@ -31,7 +31,7 @@
 
                         <label for="jabatan">Jabatan</label>
                        
-                        <select name="jabatan" class="form-control" id="jabatan">
+                        <select name="id_jabatan" class="form-control" id="jabatan">
                         
                         <?php foreach ($jabatan as $temp ){ ?>
                         <option value="<?php echo $temp->id_jabatan ?>" <?php if($temp->id_jabatan == $item->id_jabatan){echo "Selected";} ?>><?php echo $temp->nama_jabatan ?>

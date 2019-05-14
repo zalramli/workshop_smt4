@@ -8,6 +8,17 @@
         <div class="card-header py-3">
             <a href="<?= base_url() ?>pegawai/add" class="btn btn-primary">Tambah Data</a>
         </div>
+        <?php if($this->session->flashdata('message')): ?>
+
+            <div class="col-md-12">
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    Data mahasiswa <strong>berhasil</strong> <?php echo $this->session->flashdata('terserah'); ?>.
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            </div>
+        <?php endif; ?>
         <div class="card-body">
             <div class="table-responsive">
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
