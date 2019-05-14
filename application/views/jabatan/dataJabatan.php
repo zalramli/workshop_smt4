@@ -38,7 +38,7 @@
 								<td><?= $item->nama_jabatan ?></td>
 								<td>
 									<a href="<?php echo base_url() . 'jabatan/edit'; ?>/<?= $item->id_jabatan ?>" class="btn btn-success">Edit</a>
-                                    <a href="<?php echo base_url() . 'jabatan/hapus'; ?>/<?= $item->id_jabatan ?>" class="btn btn-danger"onClick="doconfirm">Hapus</a>
+                                    <a href="<?php echo base_url() . 'jabatan/hapus'; ?>/<?= $item->id_jabatan ?>" class="btn btn-danger"onClick="return doconfirm();">Hapus</a>
                                 </td>
 							</tr>
 						<?php } ?>
@@ -48,6 +48,8 @@
 		</div>
 	</div>
 </div>
+
+<script>
 function doconfirm()
 {
     job=confirm("Yakin Menghapus Data?");
