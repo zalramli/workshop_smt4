@@ -6,6 +6,7 @@ class Kasir extends CI_Controller
         parent::__construct();
         $this->load->library('cart');
         $this->load->model('m_kasir');
+        $this->load->database();
     }
 
     public function index()
@@ -99,6 +100,7 @@ class Kasir extends CI_Controller
         $this->m_kasir->input_data($data_pelanggan, 'tbl_pelanggan');
         $this->m_kasir->input_data($data_transaksi, 'tbl_transaksi');
         if ($cart = $this->cart->contents()) {
+
             foreach ($cart as $item) {
                 $data_detail = array(
                     'id_transaksi' => $this->input->post('id_transaksi'),
@@ -106,6 +108,14 @@ class Kasir extends CI_Controller
                     'qty' => $item['qty'],
                     'total_hrg' => $item['price'] * $item['qty']
                 );
+                $qq = $item['id'];
+                $q = $this->db->query("SELECT * FROM tbl_barang WHERE id_barang='$qq'")->result();
+                foreach ($q as $it) {
+                    $ids = $item['id'];
+                    $stok_awal = $it->stok_real;
+                    $stok_akhir = $stok_awal - $item['qty'];
+                    $this->db->query("UPDATE tbl_barang SET stok_real='$stok_akhir' WHERE id_barang='$ids'");
+                }
                 $this->m_kasir->input_data($data_detail, 'tbl_transaksidetail');
             }
         }
@@ -119,7 +129,6 @@ class Kasir extends CI_Controller
     }
     public function detailPemesanan($id)
     {
-        $this->load->database();
         $sql = $this->db->query("SELECT * FROM tbl_pemesanandetail JOIN tbl_barang ON tbl_pemesanandetail.id_barang = tbl_barang.id_barang JOIN tbl_kategori ON tbl_barang.id_kategori=tbl_kategori.id_kategori JOIN tbl_merk ON tbl_barang.id_merk=tbl_merk.id_merk WHERE id_pemesanan='$id'");
         $data['detail'] = $sql->result();
         $sql2 = $this->db->query("SELECT * FROM tbl_pemesanan JOIN tbl_pelanggan ON tbl_pemesanan.id_pelanggan = tbl_pelanggan.id_pelanggan WHERE id_pemesanan='$id'");
