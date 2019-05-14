@@ -2,10 +2,11 @@
 
 class Jabatan extends CI_Controller
 {
-     function __construct()
+    function __construct()
     {
         parent::__construct();
         $this->load->model('m_jabatan');
+        $this->load->library('form_validation');
     }
 
     public function index()
@@ -19,55 +20,60 @@ class Jabatan extends CI_Controller
 
     public function add()
     {
-    	$data['kode'] = $this->m_jabatan->buat_kode();
-    	$this->load->view('template/header');
-    	$this->load->view('template/navbar');
-    	$this->load->view('jabatan/inputJabatan',$data);
-    	$this->load->view('template/footer');
+     $data['kode'] = $this->m_jabatan->buat_kode();
+
+     $this->form_validation->set_rules('nama_jabatan','Jabatan','required');
+     if($this->form_validation->run() == FALSE)
+     {
+         $this->load->view('template/header');
+         $this->load->view('template/navbar');
+         $this->load->view('jabatan/inputJabatan',$data);
+         $this->load->view('template/footer');
+            $this->session->set_flashdata('message', validation_errors());
+
+     }else{
+        $this->store();}
     }
 
     public function store()
     {
-    	$id_jabatan = $this->input->post('id_jabatan');
-    	$nama_jabatan = $this->input->post('nama_jabatan');
-    	$data = array(
-    		'id_jabatan' => $id_jabatan,
-    		'nama_jabatan' => $nama_jabatan
-    	);
-    	$this->m_jabatan->input_data($data, 'tbl_jabatan');
-    	redirect('jabatan');
-    }
+        $this->session->set_flashdata('message', 'Data Berhasil Ditambahkan..!');
+    
 
-    public function edit($id)
-    {
-        $where = array('id_jabatan' => $id);
-        $data['jabatan'] = $this->m_jabatan->edit_data($where, 'tbl_jabatan')->result();
-        $this->load->view('template/header');
-        $this->load->view('template/navbar');
-        $this->load->view('jabatan/editJabatan', $data);
-        $this->load->view('template/footer');
-    }
-    public function update()
-    {
-    	$id_jabatan = $this->input->post('id_jabatan');
-    	$nama_jabatan = $this->input->post('nama_jabatan');
+     $this->m_jabatan->input_data();
+     redirect('jabatan');
+ }
 
-    	$data = array(
-    		'nama_jabatan' => $nama_jabatan
-    	);
+ public function edit($id)
+ {
+    $where = array('id_jabatan' => $id);
+    $data['jabatan'] = $this->m_jabatan->edit_data($where, 'tbl_jabatan')->result();
+    $this->load->view('template/header');
+    $this->load->view('template/navbar');
+    $this->load->view('jabatan/editJabatan', $data);
+    $this->load->view('template/footer');
+}
+public function update()
+{
+ $id_jabatan = $this->input->post('id_jabatan');
+ $nama_jabatan = $this->input->post('nama_jabatan');
 
-    	$where = array(
-    		'id_jabatan' => $id_jabatan
-    	);
+ $data = array(
+  'nama_jabatan' => $nama_jabatan
+);
 
-    	$this->m_jabatan->update_data($where, $data, 'tbl_jabatan');
-        redirect('jabatan');
-    }
+ $where = array(
+  'id_jabatan' => $id_jabatan
+);
 
-    public function hapus($id="")
-    {
-        $where = array('id_jabatan' => $id);
-        $this->m_jabatan->hapus_data($where, 'tbl_jabatan');
-        redirect('Jabatan/index');
-    }
+ $this->m_jabatan->update_data($where, $data, 'tbl_jabatan');
+ redirect('jabatan');
+}
+
+public function hapus($id="")
+{
+    $where = array('id_jabatan' => $id);
+    $this->m_jabatan->hapus_data($where, 'tbl_jabatan');
+    redirect('Jabatan/index');
+}
 }

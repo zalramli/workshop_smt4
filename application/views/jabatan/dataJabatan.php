@@ -8,6 +8,17 @@
 		<div class="card-header py-3">
 			<a href="<?= base_url() ?>Jabatan/add" class="btn btn-primary">Tambah Data</a>
 		</div>
+		 <?php if($this->session->flashdata('message')): ?>
+
+            <div class="col-md-12">
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                     <?php echo $this->session->flashdata('message'); ?>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            </div>
+        <?php endif; ?>
 		<div class="card-body">
 			<div class="table-responsive">
 				<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
@@ -27,8 +38,8 @@
 								<td><?= $item->nama_jabatan ?></td>
 								<td>
 									<a href="<?php echo base_url() . 'jabatan/edit'; ?>/<?= $item->id_jabatan ?>" class="btn btn-success">Edit</a>
-                                    <a href="<?php echo base_url() . 'jabatan/hapus'; ?>/<?= $item->id_jabatan ?>" class="btn btn-danger">Hapus</a>
-                                </td>"
+                                    <a href="<?php echo base_url() . 'jabatan/hapus'; ?>/<?= $item->id_jabatan ?>" class="btn btn-danger"onClick="doconfirm">Hapus</a>
+                                </td>
 							</tr>
 						<?php } ?>
 					</tbody>
@@ -37,3 +48,12 @@
 		</div>
 	</div>
 </div>
+function doconfirm()
+{
+    job=confirm("Yakin Menghapus Data?");
+    if(job!=true)
+    {
+        return false;
+    }
+}
+</script>
