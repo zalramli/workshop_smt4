@@ -59,4 +59,10 @@ class Kategori extends CI_Controller
         $this->m_kategori->update_data($where, $data, 'tbl_kategori');
         redirect('kategori');
     }
+    public function hapus($id)
+    {
+        $where = array('id_kategori' => $id);
+        $this->m_kategori->hapus_data($where, 'tbl_kategori');
+        redirect('kategori');
+    }
 }

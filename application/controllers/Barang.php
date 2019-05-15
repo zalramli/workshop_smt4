@@ -147,4 +147,10 @@ class Barang extends CI_Controller
             }
         }
     }
+    public function hapus($id)
+    {
+        $where = array('id_barang' => $id);
+        $this->m_barang->hapus_data($where, 'tbl_barang');
+        redirect('barang');
+    }
 }

@@ -91,6 +91,3 @@ class Pegawai extends CI_Controller
 		redirect('pegawai');
 	}
 }
-
-
-?>
