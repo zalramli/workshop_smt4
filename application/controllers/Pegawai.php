@@ -5,6 +5,7 @@ class Pegawai extends CI_Controller
 	{
 		parent::__construct();
 		$this->load->model('m_pegawai');
+		$this->load->library('form_validation');
 		
 	}
 	public function index()
@@ -23,29 +24,29 @@ class Pegawai extends CI_Controller
 	{
 		$data['kode'] = $this->m_pegawai->buat_kode();
 		$data['jabatan']= $this->m_pegawai->getJabatan()->result();
-		$this->load->view('template/header');
-		$this->load->view('template/navbar');
-		$this->load->view('pegawai/inputPegawai', $data);
-		$this->load->view('template/footer');
-	}
+		$this->form_validation->set_rules('nama_pegawai','Nama','required');
+		$this->form_validation->set_rules('alamat','Alamat','required');
+		$this->form_validation->set_rules('no_hp','Nomor HP','required|numeric');
+		if($this->form_validation->run() == FALSE )
+		{
+			$this->load->view('template/header');
+			$this->load->view('template/navbar');
+			$this->load->view('pegawai/inputPegawai', $data);
+			$this->load->view('template/footer');
+			$this->session->set_flashdata('message', validation_errors());
 
+		}else{
+			
+			$this->aksiAdd();
+		}
+	}
 	public function aksiAdd()
 	{	
-		$id_pegawai = $this->input->post('id_pegawai');
-		$nama_pegawai = $this->input->post('nama_pegawai');
-		$alamat_pegawai = $this->input->post('alamat');
-		$nohp_pegawai = $this->input->post('nohp');
-		$id_jabatan = $this->input->post('jabatan');
 
-		$data= array(
-			'id_pegawai'=>$id_pegawai,
-			'nama_pegawai'=>$nama_pegawai,
-			'alamat'=>$alamat_pegawai,
-			'no_hp'=>$nohp_pegawai,
-			'id_jabatan'=>$id_jabatan
-		);
-		$this->m_pegawai->input_data($data, 'tbl_pegawai');
-		redirect('pegawai');
+		$this->m_pegawai->input_data();
+		$this->session->set_flashdata('message', 'Data Berhasil Ditambahkan..!');
+		redirect('pegawai');	
+
 	}
 	public function edit($id)
 	{
@@ -61,11 +62,11 @@ class Pegawai extends CI_Controller
 
 	public function update()
 	{
-		$id_pegawai = $this->input->post('id_pegawai');
-		$nama_pegawai = $this->input->post('nama_pegawai');
-		$alamat = $this->input->post('alamat');
-		$nomorhp = $this->input->post('no_hp');
-		$id_jabatan = $this->input->post('jabatan');
+		$id_pegawai = $this->input->post('id_pegawai',true);
+		$nama_pegawai = $this->input->post('nama_pegawai',true);
+		$alamat = $this->input->post('alamat',true);
+		$nomorhp = $this->input->post('no_hp',true);
+		$id_jabatan = $this->input->post('id_jabatan',true);
 
 		$data = array(
 			'nama_pegawai' => $nama_pegawai,
