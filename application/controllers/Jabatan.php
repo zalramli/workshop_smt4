@@ -22,14 +22,13 @@ class Jabatan extends CI_Controller
     public function add()
     {
         $data['kode'] = $this->m_jabatan->buat_kode();
-        $this->form_validation->set_rules('nama_jabatan','Nama','required');
+        $this->form_validation->set_rules('nama_jabatan','Nama Jabatan','required');
         if($this->form_validation->run() == FALSE )
         {
             $this->load->view('template/header');
             $this->load->view('template/navbar');
             $this->load->view('jabatan/inputJabatan', $data);
             $this->load->view('template/footer');
-            $this->session->set_flashdata('message', validation_errors());
 
         }else{
 
@@ -39,7 +38,7 @@ class Jabatan extends CI_Controller
     public function aksiAdd()
     {
         $this->m_jabatan->input_data();
-        $this->session->set_flashdata('message', 'Data Berhasil Ditambahkan..!');
+        $this->session->set_flashdata('message', 'Ditambahkan !');
         redirect('jabatan');    
 
     }
@@ -48,10 +47,16 @@ class Jabatan extends CI_Controller
         $where = array('id_jabatan' => $id);
 
         $data['jabatan'] = $this->m_jabatan->edit_data($where, 'tbl_jabatan')->result();
-        $this->load->view('template/header');
-        $this->load->view('template/navbar');
-        $this->load->view('jabatan/editPegawai', $data);
-        $this->load->view('template/footer');
+        $this->form_validation->set_rules('nama_jabatan','Nama Jabatan','required');
+        if($this->form_validation->run() == FALSE )
+        {
+            $this->load->view('template/header');
+            $this->load->view('template/navbar');
+            $this->load->view('jabatan/editJabatan', $data);
+            $this->load->view('template/footer');
+        }else{
+            $this->update();
+        }
     }
 
     public function update()
@@ -69,7 +74,7 @@ class Jabatan extends CI_Controller
             'id_jabatan' => $id_jabatan,
 
         );
-
+        $this->session->set_flashdata('message', 'Diubah !');
         $this->m_jabatan->update_data($where, $data, 'tbl_jabatan');
         redirect('jabatan');
     }
@@ -77,6 +82,8 @@ class Jabatan extends CI_Controller
     function hapus($id){
         $where = array('id_jabatan' => $id);
         $this->m_jabatan->hapus_data($where,'tbl_jabatan');
+        $this->session->set_flashdata('message', 'Dihapus !');
+
         redirect('jabatan');
     }
 }

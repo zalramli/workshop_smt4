@@ -28,8 +28,9 @@
                 <div class="col-sm-6 mb-3 mb-sm-0">
 
                     <label for="nohp">Nomor HP</label>
-                    <input type="text" name="no_hp" class="form-control" id="nohp" aria-describedby="emailHelp" placeholder="Masukan Nomor HP">
-                                <small  class="form-text text-danger"><?php echo form_error('no_hp'); ?></small>
+                    <input type="number" name="no_hp" class="form-control" id="nohp" aria-describedby="emailHelp" placeholder="Masukan Nomor HP">
+                    <small  class="form-text text-danger"><?php echo form_error('no_hp'); ?></small>
+
 
                 </div>
                 <div class="col-sm-6 mb-3 mb-sm-0">

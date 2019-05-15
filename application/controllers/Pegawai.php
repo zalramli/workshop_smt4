@@ -26,14 +26,14 @@ class Pegawai extends CI_Controller
 		$data['jabatan']= $this->m_pegawai->getJabatan()->result();
 		$this->form_validation->set_rules('nama_pegawai','Nama','required');
 		$this->form_validation->set_rules('alamat','Alamat','required');
-		$this->form_validation->set_rules('no_hp','Nomor HP','required|numeric');
+		$this->form_validation->set_rules('no_hp','Nomor HP','required|numeric|max_length[13]|min_length[10]');
+
 		if($this->form_validation->run() == FALSE )
 		{
 			$this->load->view('template/header');
 			$this->load->view('template/navbar');
 			$this->load->view('pegawai/inputPegawai', $data);
 			$this->load->view('template/footer');
-			$this->session->set_flashdata('message', validation_errors());
 
 		}else{
 			
@@ -41,10 +41,22 @@ class Pegawai extends CI_Controller
 		}
 	}
 	public function aksiAdd()
-	{	
+	{	     $id_pegawai = $this->input->post('id_pegawai',true);
+        $nama_pegawai = $this->input->post('nama_pegawai',true);
+        $alamat_pegawai = $this->input->post('alamat',true);
+        $nohp_pegawai = $this->input->post('no_hp',true);
+        $id_jabatan = $this->input->post('id_jabatan',true);
 
-		$this->m_pegawai->input_data();
-		$this->session->set_flashdata('message', 'Data Berhasil Ditambahkan..!');
+        $data= array(
+            'id_pegawai'=>$id_pegawai,
+            'nama_pegawai'=>$nama_pegawai,
+            'alamat'=>$alamat_pegawai,
+            'no_hp'=>$nohp_pegawai,
+            'id_jabatan'=>$id_jabatan
+        );
+
+		$this->m_pegawai->input_data($data, 'tbl_pegawai');
+		$this->session->set_flashdata('message', 'Ditambahkan !');
 		redirect('pegawai');	
 
 	}
@@ -54,10 +66,19 @@ class Pegawai extends CI_Controller
 
 		$data['jabatan']= $this->m_pegawai->getJabatan()->result();
 		$data['pegawai'] = $this->m_pegawai->edit_data($where, 'tbl_pegawai')->result();
+		$this->form_validation->set_rules('nama_pegawai','Nama Pegawai','required');
+		$this->form_validation->set_rules('alamat','Alamat','required');
+		$this->form_validation->set_rules('no_hp','Nomor HP','required|numeric|max_length[13]|min_length[10]');
+		
+		if($this->form_validation->run() == FALSE )
+		{
 		$this->load->view('template/header');
 		$this->load->view('template/navbar');
 		$this->load->view('pegawai/editPegawai', $data);
 		$this->load->view('template/footer');
+		}else{
+			$this->update();
+		}
 	}
 
 	public function update()
@@ -82,12 +103,15 @@ class Pegawai extends CI_Controller
 		);
 
 		$this->m_pegawai->update_data($where, $data, 'tbl_pegawai');
+		$this->session->set_flashdata('message', 'Diubah !');
+
 		redirect('pegawai');
 	}
 
 	function hapus($id){
 		$where = array('id_pegawai' => $id);
 		$this->m_pegawai->hapus_data($where,'tbl_pegawai');
+		$this->session->set_flashdata('message', 'Dihapus !');
 		redirect('pegawai');
 	}
 }

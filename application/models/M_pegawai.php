@@ -40,22 +40,10 @@ class M_pegawai extends CI_Model
         return $this->db->get('tbl_pegawai');
     }
 
-    function input_data()
+    function input_data($data, $table)
     {
-        $id_pegawai = $this->input->post('id_pegawai',true);
-        $nama_pegawai = $this->input->post('nama_pegawai',true);
-        $alamat_pegawai = $this->input->post('alamat',true);
-        $nohp_pegawai = $this->input->post('no_hp',true);
-        $id_jabatan = $this->input->post('id_jabatan',true);
-
-        $data= array(
-            'id_pegawai'=>$id_pegawai,
-            'nama_pegawai'=>$nama_pegawai,
-            'alamat'=>$alamat_pegawai,
-            'no_hp'=>$nohp_pegawai,
-            'id_jabatan'=>$id_jabatan
-        );
-        $this->db->insert('tbl_pegawai', $data);
+   
+        $this->db->insert($table, $data);
     }
     function edit_data($where, $table)
     {
