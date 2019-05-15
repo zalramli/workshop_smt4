@@ -6,7 +6,7 @@
     </div>
     <div class="container-fluid">
         <?php foreach ($merk as $item) { ?>
-            <form class="" method="post" action="<?php echo base_url() . 'merk/update'; ?>">
+            <form class="" method="post" action="<?php base_url() . 'merk/update'; ?>">
                 <div class="form-group row">
                     <div class="col-sm-6 mb-3 mb-sm-0">
                         <label for="exampleInputEmail1">ID Merk</label>
@@ -15,6 +15,8 @@
                     <div class="col-sm-6 mb-3 mb-sm-0">
                         <label for="exampleInputEmail1">Nama Merk</label>
                         <input type="text" name="nama_merk" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" value="<?= $item->nama_merk ?>">
+                    <small  class="form-text text-danger"><?php echo form_error('nama_merk'); ?></small>
+
                     </div>
                 </div>
                 <button type="submit" class="btn btn-primary">Update</button>
