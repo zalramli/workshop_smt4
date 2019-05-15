@@ -37,7 +37,7 @@
                                 <td><img width="70" height="70" src="uploads/<?= $item->foto ?>" alt=""></td>
                                 <td>
                                     <a href="<?php echo base_url() . 'barang/edit'; ?>/<?= $item->id_barang ?>" class="btn btn-success">Edit</a>
-                                    <a href="" class="btn btn-danger">Hapus</a>
+                                    <a href="<?php echo base_url() . 'barang/hapus'; ?>/<?php echo $item->id_barang ?>" class="btn btn-danger">Hapus</a>
                                 </td>
                             </tr>
                         <?php } ?>
