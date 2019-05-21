@@ -3,10 +3,10 @@ class M_pelanggan extends CI_Model
 {
     function buat_kode()
     {
-        $this->db->select('RIGHT(tbl_kategori.id_kategori,2) as kode', FALSE);
-        $this->db->order_by('id_kategori', 'DESC');
+        $this->db->select('RIGHT(tbl_pelanggan.id_pelanggan,2) as kode', FALSE);
+        $this->db->order_by('id_pelanggan', 'DESC');
         $this->db->limit(1);
-        $query = $this->db->get('tbl_kategori');      //cek dulu apakah ada sudah ada kode di tabel.    
+        $query = $this->db->get('tbl_pelanggan');      //cek dulu apakah ada sudah ada kode di tabel.    
         if ($query->num_rows() <> 0) {
             //jika kode ternyata sudah ada.      
             $data = $query->row();
@@ -16,7 +16,7 @@ class M_pelanggan extends CI_Model
             $kode = 1;
         }
         $kodemax = str_pad($kode, 3, "0", STR_PAD_LEFT);
-        $kodejadi = "KTG" . $kodemax;
+        $kodejadi = "PLG" . $kodemax;
         return $kodejadi;
     }
     function tampil_data()

@@ -6,7 +6,7 @@
     </div>
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-            <a href="<?= base_url() ?>kategori/add" class="btn btn-primary">Tambah Data</a>
+            <a href="<?= base_url() ?>pelanggan/add" class="btn btn-primary">Tambah Data</a>
         </div>
         <div class="card-body">
             <div class="table-responsive">
