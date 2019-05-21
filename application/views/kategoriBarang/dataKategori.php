@@ -8,32 +8,40 @@
         <div class="card-header py-3">
             <a href="<?= base_url() ?>kategori/add" class="btn btn-primary">Tambah Data</a>
         </div>
-        <div class="card-body">
-            <div class="table-responsive">
-                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                    <thead>
-                        <tr style="text-align:center">
-                            <th>Kode Kategori</th>
-                            <th>Nama Kategori</th>
-                            <th>Aksi</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php
-                        foreach ($kategori as $item) {
-                            ?>
-                            <tr>
-                                <td><?= $item->id_kategori ?></td>
-                                <td><?= $item->nama_kategori ?></td>
-                                <td>
-                                    <a href="<?= base_url() . 'kategori/edit'; ?>/<?= $item->id_kategori ?>" class="btn btn-success">Edit</a>
-                                    <a href="<?php echo base_url() . 'kategori/hapus'; ?>/<?php echo $item->id_kategori ?>" class="btn btn-danger">Hapus</a>
-                                </td>
-                            </tr>
-                        <?php } ?>
-                    </tbody>
-                </table>
+        <?php if($this->session->flashdata('message')): ?>
+            <div class="col-md-12">
+                <div class="alert alert-success alert-dismissible fade show" role="alert">Data Merk <strong>berhasil</strong> <?php echo $this->session->flashdata('message'); ?>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span>
+                </button>
             </div>
         </div>
+    <?php endif; ?>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr style="text-align:center">
+                        <th>Kode Kategori</th>
+                        <th>Nama Kategori</th>
+                        <th>Aksi</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php
+                    foreach ($kategori as $item) {
+                        ?>
+                        <tr>
+                            <td><?= $item->id_kategori ?></td>
+                            <td><?= $item->nama_kategori ?></td>
+                            <td>
+                                <a href="<?= base_url() . 'kategori/edit'; ?>/<?= $item->id_kategori ?>" class="btn btn-success">Edit</a>
+                                <a href="<?php echo base_url() . 'kategori/hapus'; ?>/<?php echo $item->id_kategori ?>" class="btn btn-danger"onclick="return confirm('Yakin Ingin Menghapus Data ?')">Hapus</a>
+                            </td>
+                        </tr>
+                    <?php } ?>
+                </tbody>
+            </table>
+        </div>
     </div>
+</div>
 </div>

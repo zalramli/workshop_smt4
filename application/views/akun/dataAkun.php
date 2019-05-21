@@ -1,18 +1,18 @@
 <div class="container-fluid">
     <!-- Page Heading -->
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-        <h1 class="h3 mb-0 text-gray-800">Data Jabatan</h1>
+        <h1 class="h3 mb-0 text-gray-800">Data Akun</h1>
         <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
     </div>
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-            <a href="<?= base_url() ?>jabatan/add" class="btn btn-primary">Tambah Data</a>
+            <a href="<?= base_url() ?>akun/add" class="btn btn-primary">Tambah Data</a>
         </div>
-       <?php if($this->session->flashdata('message')): ?>
+         <?php if($this->session->flashdata('message')): ?>
 
             <div class="col-md-12">
                 <div class="alert alert-success alert-dismissible fade show" role="alert">
-                     Data Jabatan <strong>berhasil</strong> <?php echo $this->session->flashdata('message'); ?>
+                     Data akun <strong>berhasil</strong> <?php echo $this->session->flashdata('message'); ?>
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -24,23 +24,29 @@
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                     <thead>
                         <tr style="text-align:center">
-                            <th>Kode jabatan</th>
-                            <th>Nama jabatan</th>
-                           
+                            <th>Kode Akun</th>
+                            <th>Username</th>
+                            <th>Password</th>
+                            <th>Akses</th>
+                            <th>Nama Pegawai</th>
                             <th>Aksi</th>
+                            
                         </tr>
                     </thead>
                     <tbody>
                         <?php
-                        foreach ($jabatan as $item) {
+                        foreach ($ak as $item) {
                             ?>
                             <tr>
-                                <td><?= $item->id_jabatan ?></td>
-                                <td><?= $item->nama_jabatan ?></td>
+                                <td><?= $item->id_akun ?></td>
+                                <td><?= $item->username ?></td>
+                                <td><?= $item->password ?></td>
+                                <td><?= $item->akses ?></td>
+                                <td><?= $item->nama_pegawai ?></td>
                                
                                 <td>
-                                    <a href="<?php echo base_url() . 'jabatan/edit'; ?>/<?= $item->id_jabatan ?>" class="btn btn-success">Edit</a>
-                                    <a href="<?php echo base_url() . 'jabatan/hapus'; ?>/<?php echo $item->id_jabatan ?>" class="btn btn-danger"onClick="return doconfirm();">Hapus</a>
+                                    <a href="<?php echo base_url() . 'akun/edit'; ?>/<?= $item->id_akun ?>" class="btn btn-success">Edit</a>
+                                    <a href="<?php echo base_url() . 'akun/hapus'; ?>/<?= $item->id_akun ?>" class="btn btn-danger" onclick="return confirm('Yakin Menghapus Data ?')">Hapus</a>
                                 </td>
                             </tr>
                         <?php } ?>
@@ -50,14 +56,3 @@
         </div>
     </div>
 </div>
-
-<script>
-function doconfirm()
-{
-    job=confirm("Yakin Menghapus Data?");
-    if(job!=true)
-    {
-        return false;
-    }
-}
-</script>

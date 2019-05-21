@@ -1,6 +1,7 @@
 <?php
 class M_jabatan extends CI_Model
-{
+
+{   
     function buat_kode()
     {
         $this->db->select('RIGHT(tbl_jabatan.id_jabatan,2) as kode', FALSE);
@@ -23,21 +24,33 @@ class M_jabatan extends CI_Model
     {
         return $this->db->get('tbl_jabatan');
     }
-    function input_data($data, $table)
+
+    function input_data()
     {
-        $this->db->insert($table, $data);
+        $id_jabatan = $this->input->post('id_jabatan',true);
+        $nama_jabatan = $this->input->post('nama_jabatan',true);
+        
+        $data= array(
+            'id_jabatan'=>$id_jabatan,
+            'nama_jabatan'=>$nama_jabatan,
+            
+        );
+        $this->db->insert('tbl_jabatan', $data);
     }
     function edit_data($where, $table)
     {
         return $this->db->get_where($table, $where);
     }
-    function update_data($where, $data, $table)
-    {
+    function update_data($where,$data,$table){
         $this->db->where($where);
-        $this->db->update($table, $data);
+        $this->db->update($table,$data);
     }
-    function hapus_data($where, $table)
-    {
-        $this->db->delete($table, $where);
-    }
+    function hapus_data($where,$table){
+        $this->db->where($where);
+        $this->db->delete($table);
+    }   
+
 }
+
+
+?>

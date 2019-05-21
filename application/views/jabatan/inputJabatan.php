@@ -5,20 +5,23 @@
         <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
     </div>
     <div class="container-fluid">
-        <form class="" method="post" action="<?php echo base_url() . 'Jabatan/store'; ?>">
+        <form class="" method="post" action="<?php base_url() . 'jabatan/aksiAdd';?>">
             <div class="form-group row">
                 <div class="col-sm-6 mb-3 mb-sm-0">
-                    <label for="exampleInputEmail1">ID Jabatan</label>
-                    <input type="text" name="id_jabatan" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Masukan ID" value="<?= $kode ?>" readonly>
+                    <label for="exampleInputEmail1">ID jabatan</label>
+                    <input type="text" name="id_jabatan" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" value="<?= $kode ?>" readonly>
                 </div>
                 <div class="col-sm-6 mb-3 mb-sm-0">
 
-                    <label for="exampleInputEmail1">Nama Jabatan</label>
+                    <label for="exampleInputEmail1">Nama jabatan</label>
                     <input type="text" name="nama_jabatan" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Masukan nama">
+                    <small  class="form-text text-danger"><?php echo form_error('nama_jabatan'); ?></small>
+
                 </div>
+
             </div>
             <button type="submit" class="btn btn-primary">Simpan</button>
-            <a href="<?php echo base_url() . 'Jabatan'; ?>" class="btn btn-danger">Kembali</a>
+            <a href="<?php echo base_url() . 'jabatan'; ?>" class="btn btn-danger">Kembali</a>
         </form>
     </div>
 </div>

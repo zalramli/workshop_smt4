@@ -6,6 +6,7 @@ class Kategori extends CI_Controller
     {
         parent::__construct();
         $this->load->model('m_kategori');
+        $this->load->library('form_validation');
     }
     public function index()
     {
@@ -18,10 +19,18 @@ class Kategori extends CI_Controller
     public function add()
     {
         $data['kode'] = $this->m_kategori->buat_kode();
-        $this->load->view('template/header');
-        $this->load->view('template/navbar');
-        $this->load->view('kategoriBarang/inputKategori', $data);
-        $this->load->view('template/footer');
+        $this->form_validation->set_rules('nama_kategori','Nama Kategori','required');
+        if($this->form_validation->run()==FALSE)
+        {
+
+            $this->load->view('template/header');
+            $this->load->view('template/navbar');
+            $this->load->view('kategoriBarang/inputKategori', $data);
+            $this->load->view('template/footer');
+        }else{
+            $this->store();
+        }
+
     }
     public function store()
     {
@@ -32,16 +41,24 @@ class Kategori extends CI_Controller
             'nama_kategori' => $nama_kategori
         );
         $this->m_kategori->input_data($data, 'tbl_kategori');
+        $this->session->set_flashdata('message', 'Ditambahkan !');
         redirect('kategori');
     }
     public function edit($id)
     {
         $where = array('id_kategori' => $id);
         $data['kategori'] = $this->m_kategori->edit_data($where, 'tbl_kategori')->result();
-        $this->load->view('template/header');
-        $this->load->view('template/navbar');
-        $this->load->view('kategoriBarang/editKategori', $data);
-        $this->load->view('template/footer');
+        $this->form_validation->set_rules('nama_kategori','Nama Kategori','required');
+        if($this->form_validation->run()==FALSE)
+        {
+
+            $this->load->view('template/header');
+            $this->load->view('template/navbar');
+            $this->load->view('kategoriBarang/editKategori', $data);
+            $this->load->view('template/footer');
+        }else{
+            $this->update();
+        }
     }
     public function update()
     {
@@ -57,12 +74,14 @@ class Kategori extends CI_Controller
         );
 
         $this->m_kategori->update_data($where, $data, 'tbl_kategori');
+        $this->session->set_flashdata('message','Diubah !');
         redirect('kategori');
     }
     public function hapus($id)
     {
         $where = array('id_kategori' => $id);
         $this->m_kategori->hapus_data($where, 'tbl_kategori');
+        $this->session->set_flashdata('message','Dihapus !');
         redirect('kategori');
     }
 }

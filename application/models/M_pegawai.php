@@ -42,6 +42,7 @@ class M_pegawai extends CI_Model
 
     function input_data($data, $table)
     {
+   
         $this->db->insert($table, $data);
     }
     function edit_data($where, $table)
