@@ -12,7 +12,7 @@
                 <div class="form-group row">
                     <div class="col-sm-6 mb-3 mb-sm-0">
                         <label for="exampleInputEmail1">Kode Akun</label>
-                        <input type="text" name="id_akun" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" value="<?= $kode ?>" readonly>
+                        <input type="text" name="id_akun" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" value="<?= $key->id_akun ?>" readonly>
                     </div>
                     <div class="col-sm-6 mb-3 mb-sm-0">
 

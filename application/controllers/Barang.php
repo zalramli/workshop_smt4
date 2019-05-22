@@ -26,7 +26,6 @@ class Barang extends CI_Controller
     }
     public function store()
     {
-
         $config['upload_path']          = './uploads/';
         $config['allowed_types']        = 'gif|jpg|png';
         $config['max_size']             = 0;

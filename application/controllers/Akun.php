@@ -48,7 +48,7 @@ class Akun extends CI_Controller
 			'akses' => $akses,
 			'id_user' => $id_user
 		);
-		$this->session->set_flashdata('message', 'Ditambahkan !');
+		$this->session->set_flashdata('sukses', 'Ditambahkan !');
 		$this->m_akun->input_data($data, 'tbl_akun');
 		redirect('akun');
 	}
@@ -85,7 +85,6 @@ class Akun extends CI_Controller
 		$id_user = $this->input->post('id_user');
 
 		$data = array(
-			'id_akun' => $id_akun,
 			'username' => $username,
 			'password' => $password,
 			'akses' => $akses,
@@ -99,14 +98,14 @@ class Akun extends CI_Controller
 		);
 
 		$this->m_akun->update_data($where, $data, 'tbl_akun');
-		$this->session->set_flashdata('message', 'Diubah !');
+		$this->session->set_flashdata('edit', 'Diubah !');
 		redirect('akun');
 	}
 	function hapus($id)
 	{
 		$where = array('id_akun' => $id);
 		$this->m_akun->hapus_data($where, 'tbl_akun');
-		$this->session->set_flashdata('message', 'Dihapus !');
+		$this->session->set_flashdata('hapus', 'Dihapus !');
 
 		redirect('akun');
 	}

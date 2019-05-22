@@ -7,14 +7,27 @@
     <div class="card shadow mb-4">
         <div class="card-header py-3">
             <a href="<?= base_url() ?>akun/add" class="btn btn-primary">Tambah Data</a>
-        </div>
-        <?php if ($this->session->flashdata('message')) : ?>
-
+        </div><br>
+        <?php if ($this->session->flashdata('sukses')) : ?>
             <div class="col-md-12">
-                <div class="alert alert-success alert-dismissible fade show" role="alert">
-                    Data akun <strong>berhasil</strong> <?php echo $this->session->flashdata('message'); ?>
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
+                <div class="alert alert-success alert-dismissible fade show" role="alert">Data Kategori <strong>berhasil</strong> <?php echo $this->session->flashdata('sukses'); ?>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            </div>
+        <?php endif; ?>
+        <?php if ($this->session->flashdata('edit')) : ?>
+            <div class="col-md-12">
+                <div class="alert alert-warning alert-dismissible fade show" role="alert">Data Kategori <strong>berhasil</strong> <?php echo $this->session->flashdata('edit'); ?>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            </div>
+        <?php endif; ?>
+        <?php if ($this->session->flashdata('hapus')) : ?>
+            <div class="col-md-12">
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">Data Kategori <strong>berhasil</strong> <?php echo $this->session->flashdata('hapus'); ?>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span>
                     </button>
                 </div>
             </div>
