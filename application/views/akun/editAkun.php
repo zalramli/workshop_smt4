@@ -5,7 +5,7 @@
         <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
     </div>
     <div class="container-fluid">
-        <?php foreach ($ak as $key ) {?>
+        <?php foreach ($ak as $key) { ?>
 
 
             <form class="" method="post" action="<?php base_url() . 'akun/update'; ?>">
@@ -17,44 +17,52 @@
                     <div class="col-sm-6 mb-3 mb-sm-0">
 
                         <label for="exampleInputEmail1">Username</label>
-                        <input type="text" name="username" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"value="<?php echo $key->username ?>" >
-                        <small  class="form-text text-danger"><?php echo form_error('username'); ?></small>
+                        <input type="text" name="username" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" value="<?php echo $key->username ?>">
+                        <small class="form-text text-danger"><?php echo form_error('username'); ?></small>
 
                     </div>
                     <div class="col-sm-6 mb-3 mb-sm-0">
 
-                       <label for="exampleInputEmail1">Password</label>
-                       <input type="password" name="password" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" >
-                       <small  class="form-text text-danger"value="<?php echo $key->password ?>"><?php echo form_error('password'); ?></small>
+                        <label for="exampleInputEmail1">Password</label>
+                        <input type="password" name="password" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" value="<?php echo $key->password ?>">
+                        <small class="form-text text-danger"><?php echo form_error('password'); ?></small>
 
-                   </div>
-                   <div class="col-sm-6 mb-3 mb-sm-0">
+                    </div>
+                    <div class="col-sm-6 mb-3 mb-sm-0">
 
-                    <label for="Akses">Akses</label>
-                    <select name="Akses" class="form-control">
-                        <option value="" disabled>--Pilih--</option>
-                        <option value="Manajer" <?php {echo "Selected";} ?>>Manajer</option>
-                        <option value="Owner" <?php {echo "Selected";} ?>>Owner</option>
-                        <option value="Operator" <?php {echo "Selected";} ?>>Operator</option>
-                    </select>
+                        <label for="Akses">Akses</label>
+                        <select name="Akses" class="form-control">
+                            <option value="" disabled>--Pilih--</option>
+                            <option value="Manajer" <?php {
+                                                        echo "Selected";
+                                                    } ?>>Manajer</option>
+                            <option value="Owner" <?php {
+                                                        echo "Selected";
+                                                    } ?>>Owner</option>
+                            <option value="Operator" <?php {
+                                                            echo "Selected";
+                                                        } ?>>Operator</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-6 mb-3 mb-sm-0">
+
+                        <label for="id_user">Nama Pegawai</label>
+                        <select name="id_user" class="form-control">
+                            <option value="" disabled="">--Pilih--</option>
+                            <?php foreach ($peg as $temp) { ?>
+                                <option value="<?php echo $temp->id_pegawai ?>" <?php if ($temp->id_pegawai == $key->id_user) {
+                                                                                    echo "Selected";
+                                                                                } ?>><?php echo $temp->nama_pegawai ?>
+                                </option>
+                            <?php } ?>
+                        </select>
+
+                    </div>
+
                 </div>
-                <div class="col-sm-6 mb-3 mb-sm-0">
-
-                    <label for="id_user">Nama Pegawai</label>
-                    <select name="id_user" class="form-control" >
-                        <option value="" disabled="">--Pilih--</option>
-                        <?php foreach ($peg as $temp ){ ?>
-                            <option value="<?php echo $temp->id_pegawai ?>"<?php if($temp->id_pegawai == $key->id_user){echo "Selected";} ?>><?php echo $temp->nama_pegawai ?>
-                        </option>
-                    <?php } ?>  
-                </select>
-
-            </div>
-
-        </div>
-        <button type="submit" class="btn btn-primary">Simpan</button>
-        <a href="<?php echo base_url() . 'akun'; ?>" class="btn btn-danger">Kembali</a>
-    </form>
-<?php } ?>
-</div>
+                <button type="submit" class="btn btn-primary">Simpan</button>
+                <a href="<?php echo base_url() . 'akun'; ?>" class="btn btn-danger">Kembali</a>
+            </form>
+        <?php } ?>
+    </div>
 </div>

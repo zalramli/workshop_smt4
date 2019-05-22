@@ -34,7 +34,7 @@
                 </div>
                 <div class="col-sm-6 mb-3 mb-sm-0">
 
-                    <label for="exampleInputEmail1">Nama Kategori</label>
+                    <label for="exampleInputEmail1">Nama Barang</label>
                     <input type="text" name="nama_barang" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Masukan nama">
                 </div>
 

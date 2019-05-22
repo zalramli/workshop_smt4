@@ -8,11 +8,11 @@
         <div class="card-header py-3">
             <a href="<?= base_url() ?>akun/add" class="btn btn-primary">Tambah Data</a>
         </div>
-         <?php if($this->session->flashdata('message')): ?>
+        <?php if ($this->session->flashdata('message')) : ?>
 
             <div class="col-md-12">
                 <div class="alert alert-success alert-dismissible fade show" role="alert">
-                     Data akun <strong>berhasil</strong> <?php echo $this->session->flashdata('message'); ?>
+                    Data akun <strong>berhasil</strong> <?php echo $this->session->flashdata('message'); ?>
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -30,7 +30,7 @@
                             <th>Akses</th>
                             <th>Nama Pegawai</th>
                             <th>Aksi</th>
-                            
+
                         </tr>
                     </thead>
                     <tbody>
@@ -43,7 +43,7 @@
                                 <td><?= $item->password ?></td>
                                 <td><?= $item->akses ?></td>
                                 <td><?= $item->nama_pegawai ?></td>
-                               
+
                                 <td>
                                     <a href="<?php echo base_url() . 'akun/edit'; ?>/<?= $item->id_akun ?>" class="btn btn-success">Edit</a>
                                     <a href="<?php echo base_url() . 'akun/hapus'; ?>/<?= $item->id_akun ?>" class="btn btn-danger" onclick="return confirm('Yakin Menghapus Data ?')">Hapus</a>

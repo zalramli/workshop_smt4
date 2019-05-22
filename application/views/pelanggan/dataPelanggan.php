@@ -7,7 +7,31 @@
     <div class="card shadow mb-4">
         <div class="card-header py-3">
             <a href="<?= base_url() ?>pelanggan/add" class="btn btn-primary">Tambah Data</a>
-        </div>
+        </div><br>
+        <?php if ($this->session->flashdata('sukses')) : ?>
+            <div class="col-md-12">
+                <div class="alert alert-success alert-dismissible fade show" role="alert">Data Kategori <strong>berhasil</strong> <?php echo $this->session->flashdata('sukses'); ?>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            </div>
+        <?php endif; ?>
+        <?php if ($this->session->flashdata('edit')) : ?>
+            <div class="col-md-12">
+                <div class="alert alert-warning alert-dismissible fade show" role="alert">Data Kategori <strong>berhasil</strong> <?php echo $this->session->flashdata('edit'); ?>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            </div>
+        <?php endif; ?>
+        <?php if ($this->session->flashdata('hapus')) : ?>
+            <div class="col-md-12">
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">Data Kategori <strong>berhasil</strong> <?php echo $this->session->flashdata('hapus'); ?>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            </div>
+        <?php endif; ?>
         <div class="card-body">
             <div class="table-responsive">
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
@@ -33,7 +57,7 @@
                                 <td><?= $item->no_hp ?></td>
                                 <td>
                                     <a href="<?= base_url() . 'pelanggan/edit'; ?>/<?= $item->id_pelanggan ?>" class="btn btn-success">Edit</a>
-                                    <a href="<?php echo base_url() . 'pelanggan/hapus'; ?>/<?php echo $item->id_pelanggan ?>" class="btn btn-danger">Hapus</a>
+                                    <a href="<?php echo base_url() . 'pelanggan/hapus'; ?>/<?php echo $item->id_pelanggan ?>" class="btn btn-danger" onclick="return confirm('Yakin Ingin Menghapus Data ?')">Hapus</a>
                                 </td>
                             </tr>
                         <?php } ?>

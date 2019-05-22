@@ -18,17 +18,16 @@ class Pelanggan extends CI_Controller
     {
         $data['kode'] = $this->m_pelanggan->buat_kode();
         $this->form_validation->set_rules('nama_pelanggan', 'Nama Pelanggan', 'required');
-        $this->form_validation->set_rules('email', 'Email', 'required');
-        $this->form_validation->set_rules('no_hp', 'No Hp', 'required');
+        $this->form_validation->set_rules('email', 'Email', 'required|valid_email');
+        $this->form_validation->set_rules('no_hp', 'No Hp', 'required|numeric');
         $this->form_validation->set_rules('alamat', 'Alamat', 'required');
-        if($this->form_validation->run()==FALSE)
-        {
+        if ($this->form_validation->run() == FALSE) {
 
             $this->load->view('template/header');
             $this->load->view('template/navbar');
             $this->load->view('pelanggan/inputPelanggan', $data);
             $this->load->view('template/footer');
-        }else{
+        } else {
             $this->store();
         }
     }
@@ -47,7 +46,7 @@ class Pelanggan extends CI_Controller
             'no_hp' => $no_hp
         );
         $this->m_pelanggan->input_data($data, 'tbl_pelanggan');
-        $this->session->set_flashdata('message', 'Ditambahkan !');
+        $this->session->set_flashdata('sukses', 'Ditambahkan !');
         redirect('pelanggan');
     }
     public function edit($id)
@@ -55,8 +54,8 @@ class Pelanggan extends CI_Controller
         $where = array('id_pelanggan' => $id);
         $data['pelanggan'] = $this->m_pelanggan->edit_data($where, 'tbl_pelanggan')->result();
         $this->form_validation->set_rules('nama_pelanggan', 'Nama Pelanggan', 'required');
-        $this->form_validation->set_rules('email', 'Email', 'required');
-        $this->form_validation->set_rules('no_hp', 'No Hp', 'required');
+        $this->form_validation->set_rules('email', 'Email', 'required|valid_email');
+        $this->form_validation->set_rules('no_hp', 'No Hp', 'required|numeric');
         $this->form_validation->set_rules('alamat', 'Alamat', 'required');
 
 
@@ -90,7 +89,14 @@ class Pelanggan extends CI_Controller
         );
 
         $this->m_pelanggan->update_data($where, $data, 'tbl_pelanggan');
-        $this->session->set_flashdata('message', 'Diubah !');
+        $this->session->set_flashdata('edit', 'Diubah !');
+        redirect('pelanggan');
+    }
+    function hapus($id)
+    {
+        $where = array('id_pelanggan' => $id);
+        $this->m_pelanggan->hapus_data($where, 'tbl_pelanggan');
+        $this->session->set_flashdata('hapus', 'Dihapus !');
         redirect('pelanggan');
     }
 }
