@@ -9,6 +9,11 @@
             <a href="<?= base_url() ?>kategori/add" class="btn btn-primary">Tambah Data</a>
         </div>
         <div class="card-body">
+            <form target="_blank" method="post" action="<?php echo base_url() . 'transaksi/print'; ?>">
+                <input type="date" name="tgl_awal"> ---
+                <input type="date" name="tgl_akhir"> &nbsp;&nbsp;&nbsp;&nbsp;
+                <button style="height:40px; margin-bottom: 3px;" class="btn btn-success"><i class="fa fa-print" style="color:white;"> </i></button>
+            </form><br>
             <div class="table-responsive">
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                     <thead>
@@ -27,13 +32,12 @@
                             ?>
                             <tr>
                                 <td><?= $item->id_transaksi ?></td>
-                                <td><?= $item->id_pelanggan ?></td>
+                                <td><?= $item->nama_pelanggan ?></td>
                                 <td><?= $item->tanggal ?></td>
                                 <td><?= $item->total_harga ?></td>
-                                <td><?= $item->id_pegawai ?></td>
+                                <td><?= $item->nama_pegawai ?></td>
                                 <td>
-                                    <a href="<?= base_url() . 'pelanggan/edit'; ?>/<?= $item->id_pelanggan ?>" class="btn btn-warning">Detail</a>
-                                    <a href="<?php echo base_url() . 'pelanggan/hapus'; ?>/<?php echo $item->id_pelanggan ?>" class="btn btn-danger">Hapus</a>
+                                    <a href="<?= base_url() . 'transaksi/detail'; ?>/<?= $item->id_pelanggan ?>" class="btn btn-warning">Detail</a>
                                 </td>
                             </tr>
                         <?php } ?>

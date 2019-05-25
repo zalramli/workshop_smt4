@@ -21,7 +21,10 @@ class M_transaksi extends CI_Model
     }
     function tampil_data()
     {
-        return $this->db->get('tbl_transaksi');
+        $this->load->database();
+
+        $sql = $this->db->query("SELECT * FROM tbl_transaksi JOIN tbl_pegawai USING(id_pegawai) JOIN tbl_pelanggan USING(id_pelanggan) ");
+        return $sql;
     }
     function input_data($data, $table)
     {

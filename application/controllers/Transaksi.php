@@ -15,4 +15,27 @@ class Transaksi extends CI_Controller
         $this->load->view('transaksi/dataTransaksi', $data);
         $this->load->view('template/footer');
     }
+    public function print()
+    {
+        $this->load->database();
+        $tgl_awal = $this->input->post('tgl_awal');
+        $tgl_akhir    = $this->input->post('tgl_akhir');
+        $sql = $this->db->query("SELECT * FROM tbl_transaksi JOIN tbl_pegawai USING(id_pegawai) JOIN tbl_pelanggan USING(id_pelanggan) WHERE tanggal BETWEEN '$tgl_awal' AND '$tgl_akhir' ORDER BY id_transaksi ASC");
+        $data['ambil'] = $sql->result();
+        $data['tgl_awal'] = $tgl_awal;
+        $data['tgl_akhir'] = $tgl_akhir;
+        $html = $this->load->view('transaksi/rekap', $data, true);
+
+        //this the the PDF filename that user will get to download
+        $pdfFilePath = "print_rekap.pdf";
+
+        //load mPDF library
+        $this->load->library('m_pdf');
+        ob_start();
+        //generate the PDF from the given html
+        $this->m_pdf->pdf->WriteHTML($html);
+
+        //download it.
+        $this->m_pdf->pdf->Output($pdfFilePath, "I");
+    }
 }
