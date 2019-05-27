@@ -1,3 +1,9 @@
+<?php
+$data = $this->session->userdata("nama");
+if (!isset($data)) {
+    redirect('login');
+}
+?>
 <div class="container-fluid">
     <!-- Page Heading -->
     <div class="d-sm-flex align-items-center justify-content-between mb-4">

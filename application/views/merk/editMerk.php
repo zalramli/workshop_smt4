@@ -1,3 +1,9 @@
+<?php
+$data = $this->session->userdata("nama");
+if (!isset($data)) {
+    redirect('login');
+}
+?>
 <div class="container-fluid">
     <!-- Page Heading -->
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
@@ -10,12 +16,12 @@
                 <div class="form-group row">
                     <div class="col-sm-6 mb-3 mb-sm-0">
                         <label for="exampleInputEmail1">ID Merk</label>
-                        <input type="text" name="id_merk" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"  value="<?= $item->id_merk ?>" readonly>
+                        <input type="text" name="id_merk" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" value="<?= $item->id_merk ?>" readonly>
                     </div>
                     <div class="col-sm-6 mb-3 mb-sm-0">
                         <label for="exampleInputEmail1">Nama Merk</label>
                         <input type="text" name="nama_merk" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" value="<?= $item->nama_merk ?>">
-                    <small  class="form-text text-danger"><?php echo form_error('nama_merk'); ?></small>
+                        <small class="form-text text-danger"><?php echo form_error('nama_merk'); ?></small>
 
                     </div>
                 </div>
@@ -25,4 +31,3 @@
         <?php } ?>
     </div>
 </div>
-

@@ -44,4 +44,8 @@ class M_transaksi extends CI_Model
         $this->db->where($where);
         $this->db->delete($table);
     }
+    public function cek_login($table, $where)
+    {
+        return $this->db->get_where($table, $where);
+    }
 }

@@ -1,3 +1,9 @@
+<?php
+$data = $this->session->userdata("nama");
+if (!isset($data)) {
+    redirect('login');
+}
+?>
 <div class="container-fluid">
     <!-- Page Heading -->
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
@@ -15,42 +21,42 @@
 
                     <label for="exampleInputEmail1">Username</label>
                     <input type="text" name="username" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Masukan Username">
-                    <small  class="form-text text-danger"><?php echo form_error('username'); ?></small>
+                    <small class="form-text text-danger"><?php echo form_error('username'); ?></small>
 
                 </div>
                 <div class="col-sm-6 mb-3 mb-sm-0">
 
-                 <label for="exampleInputEmail1">Password</label>
-                 <input type="password" name="password" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Masukan Password">
-                 <small  class="form-text text-danger"><?php echo form_error('password'); ?></small>
+                    <label for="exampleInputEmail1">Password</label>
+                    <input type="password" name="password" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Masukan Password">
+                    <small class="form-text text-danger"><?php echo form_error('password'); ?></small>
 
-             </div>
-             <div class="col-sm-6 mb-3 mb-sm-0">
+                </div>
+                <div class="col-sm-6 mb-3 mb-sm-0">
 
-                <label for="Akses">Akses</label>
-                <select name="Akses" class="form-control">
-                    <option value="" >--Pilih--</option>
-                    <option value="Manajer" >Manajer</option>
-                    <option value="Owner" >Owner</option>
-                    <option value="Operator" >Operator</option>
-                </select>
+                    <label for="Akses">Akses</label>
+                    <select name="Akses" class="form-control">
+                        <option value="">--Pilih--</option>
+                        <option value="Manajer">Manajer</option>
+                        <option value="Owner">Owner</option>
+                        <option value="Operator">Operator</option>
+                    </select>
+                </div>
+                <div class="col-sm-6 mb-3 mb-sm-0">
+
+                    <label for="id_user">Nama Pegawai</label>
+                    <select name="id_user" class="form-control">
+                        <option value="" disabled="">--Pilih--</option>
+                        <?php foreach ($peg as $temp) { ?>
+                            <option value="<?php echo $temp->id_pegawai ?>"><?php echo $temp->nama_pegawai ?>
+                            </option>
+                        <?php } ?>
+                    </select>
+
+                </div>
+
             </div>
-            <div class="col-sm-6 mb-3 mb-sm-0">
-
-                <label for="id_user">Nama Pegawai</label>
-                <select name="id_user" class="form-control" >
-                    <option value="" disabled="">--Pilih--</option>
-                    <?php foreach ($peg as $temp ){ ?>
-                        <option value="<?php echo $temp->id_pegawai ?>"><?php echo $temp->nama_pegawai ?>
-                    </option>
-                <?php } ?>    
-            </select>
-
-        </div>
-
+            <button type="submit" class="btn btn-primary">Simpan</button>
+            <a href="<?php echo base_url() . 'akun'; ?>" class="btn btn-danger">Kembali</a>
+        </form>
     </div>
-    <button type="submit" class="btn btn-primary">Simpan</button>
-    <a href="<?php echo base_url() . 'akun'; ?>" class="btn btn-danger">Kembali</a>
-</form>
-</div>
 </div>

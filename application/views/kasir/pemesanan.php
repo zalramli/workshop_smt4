@@ -1,3 +1,9 @@
+<?php
+$data = $this->session->userdata("nama");
+if (!isset($data)) {
+    redirect('login');
+}
+?>
 <!doctype html>
 <html lang="en">
 

@@ -1,3 +1,9 @@
+<?php
+$data = $this->session->userdata("nama");
+if (!isset($data)) {
+    redirect('login');
+}
+?>
 <div class="container-fluid">
     <!-- Page Heading -->
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
@@ -15,7 +21,7 @@
 
                     <label for="exampleInputEmail1">Nama Kategori</label>
                     <input type="text" name="nama_kategori" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Masukan nama">
-                    <small  class="form-text text-danger"><?php echo form_error('nama_kategori'); ?></small>
+                    <small class="form-text text-danger"><?php echo form_error('nama_kategori'); ?></small>
 
                 </div>
             </div>
