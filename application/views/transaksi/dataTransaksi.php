@@ -12,7 +12,6 @@ if (!isset($data)) {
     </div>
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-            <a href="<?= base_url() ?>kategori/add" class="btn btn-primary">Tambah Data</a>
         </div>
         <div class="card-body">
             <form target="_blank" method="post" action="<?php echo base_url() . 'transaksi/print'; ?>">
@@ -42,8 +41,8 @@ if (!isset($data)) {
                                 <td><?= $item->tanggal ?></td>
                                 <td><?= $item->total_harga ?></td>
                                 <td><?= $item->nama_pegawai ?></td>
-                                <td>
-                                    <a href="<?= base_url() . 'transaksi/detail'; ?>/<?= $item->id_pelanggan ?>" class="btn btn-warning">Detail</a>
+                                <td style="text-align:center;">
+                                    <a href="<?= base_url() . 'transaksi/detail'; ?>/<?= $item->id_transaksi ?>" class="btn btn-warning">Detail</a>
                                 </td>
                             </tr>
                         <?php } ?>

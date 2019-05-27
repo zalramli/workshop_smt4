@@ -38,4 +38,17 @@ class Transaksi extends CI_Controller
         //download it.
         $this->m_pdf->pdf->Output($pdfFilePath, "I");
     }
+    public function detail($id)
+    {
+        $sql = $this->db->query("SELECT * FROM tbl_transaksidetail JOIN tbl_transaksi USING(id_transaksi) JOIN tbl_barang USING(id_barang) WHERE id_transaksi='$id'");
+        $data['detail'] = $sql->result();
+        $sql2 = $this->db->query("SELECT * FROM tbl_transaksi JOIN tbl_pegawai USING(id_pegawai) JOIN tbl_pelanggan USING (id_pelanggan) WHERE id_transaksi = '$id'");
+        $data['transaksi'] = $sql2->result();
+        $sql3 = $this->db->query("SELECT COUNT(*) AS jumlah_barang FROM tbl_transaksidetail WHERE id_transaksi = '$id'");
+        $data['count'] = $sql3->result();
+        $this->load->view('template/header');
+        $this->load->view('template/navbar');
+        $this->load->view('transaksi/detailTransaksi', $data);
+        $this->load->view('template/footer');
+    }
 }

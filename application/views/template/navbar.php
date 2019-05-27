@@ -48,13 +48,6 @@
         </li>
 
         <!-- Nav Item - Utilities Collapse Menu -->
-        <li class="nav-item <?php if ($this->uri->segment(1) == "laporan") {
-                                echo "active";
-                            } ?>">
-            <a class="nav-link" href="<?= base_url() ?>laporan">
-                <i class="fas fa-fw fa-tachometer-alt"></i>
-                <span>Laporan</span></a>
-        </li>
 
         <!-- Divider -->
         <hr class="sidebar-divider">
