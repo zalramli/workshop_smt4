@@ -104,7 +104,12 @@ function TanggalIndo($date)
                                     <td></td>
                                     <td></td>
                                     <th></th>
-                                    <th><a href="" class="btn btn-primary">Proses</a></th>
+                                    <th>
+                                        <form method="post" action="<?= base_url() . 'kasir/prosesPemesanan' ?>">
+                                            <input name="id_pemesanan" type="text" value="<?= $this->uri->segment(3) ?>">
+                                            <button type="submit" class="btn btn-primary">Proses</button>
+                                        </form>
+                                    </th>
                                 </tr>
                             </tbody>
                         </table>

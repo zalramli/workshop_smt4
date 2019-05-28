@@ -146,4 +146,21 @@ class Kasir extends CI_Controller
         $data['pelanggan'] = $sql2->result();
         $this->load->view('kasir/detailPemesanan', $data);
     }
+    public function prosesPemesanan()
+    {
+        $id = $this->input->post('id_pemesanan');
+        $sql = $this->db->query("SELECT * FROM tbl_pemesanandetail JOIN tbl_barang ON tbl_pemesanandetail.id_barang = tbl_barang.id_barang JOIN tbl_kategori ON tbl_barang.id_kategori=tbl_kategori.id_kategori JOIN tbl_merk ON tbl_barang.id_merk=tbl_merk.id_merk WHERE id_pemesanan='$id'");
+        foreach ($sql->result() as $item) {
+            $data_produk = array(
+                'id' => $item->id_barang,
+                'name' => $item->nama_barang,
+                'price' => $item->harga,
+                'foto' => $item->foto,
+                'qty' => $item->jumlah
+            );
+            $this->cart->insert($data_produk);
+        }
+
+        redirect('kasir/cart');
+    }
 }
