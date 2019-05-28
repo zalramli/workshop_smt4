@@ -11,6 +11,8 @@ class Kasir extends CI_Controller
 
     public function index()
     {
+        $sql = $this->db->query("SELECT COUNT(*) as counts FROM tbl_pemesanan WHERE status='belum'");
+        $data['jumlah'] = $sql->result();
         $kategori = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
         $data['kategori'] = $this->m_kasir->get_kategori_all();
         $data['produk'] = $this->m_kasir->get_produk_kategori($kategori);
@@ -30,7 +32,9 @@ class Kasir extends CI_Controller
     }
     public function cart()
     {
-        $this->load->view('kasir/tampil_cart');
+        $sql = $this->db->query("SELECT COUNT(*) as counts FROM tbl_pemesanan WHERE status='belum'");
+        $data['jumlah'] = $sql->result();
+        $this->load->view('kasir/tampil_cart', $data);
     }
     public function hapusCart($rowid)
     {
@@ -67,6 +71,8 @@ class Kasir extends CI_Controller
     }
     public function check_out()
     {
+        $sql = $this->db->query("SELECT COUNT(*) as counts FROM tbl_pemesanan WHERE status='belum'");
+        $data['jumlah'] = $sql->result();
         $data['pelanggan'] = $this->m_kasir->buat_kodePelanggan();
         $data['transaksi'] = $this->m_kasir->buat_kodeTransaksi();
         $data['kategori'] = $this->m_kasir->get_kategori_all();
@@ -124,11 +130,16 @@ class Kasir extends CI_Controller
     }
     public function pemesanan()
     {
-        $data['pemesanan'] = $this->m_kasir->getPemesanan();
+        $sql = $this->db->query("SELECT COUNT(*) as counts FROM tbl_pemesanan WHERE status='belum'");
+        $data['jumlah'] = $sql->result();
+        $sql = $this->db->query("SELECT * FROM tbl_pemesanan JOIN tbl_pelanggan USING(id_pelanggan) WHERE status='belum'");
+        $data['pemesanan'] = $sql->result();
         $this->load->view('kasir/pemesanan', $data);
     }
     public function detailPemesanan($id)
     {
+        $sql5 = $this->db->query("SELECT COUNT(*) as counts FROM tbl_pemesanan WHERE status='belum'");
+        $data['jumlah'] = $sql5->result();
         $sql = $this->db->query("SELECT * FROM tbl_pemesanandetail JOIN tbl_barang ON tbl_pemesanandetail.id_barang = tbl_barang.id_barang JOIN tbl_kategori ON tbl_barang.id_kategori=tbl_kategori.id_kategori JOIN tbl_merk ON tbl_barang.id_merk=tbl_merk.id_merk WHERE id_pemesanan='$id'");
         $data['detail'] = $sql->result();
         $sql2 = $this->db->query("SELECT * FROM tbl_pemesanan JOIN tbl_pelanggan ON tbl_pemesanan.id_pelanggan = tbl_pelanggan.id_pelanggan WHERE id_pemesanan='$id'");

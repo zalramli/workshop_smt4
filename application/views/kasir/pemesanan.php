@@ -3,6 +3,17 @@ $data = $this->session->userdata("nama");
 if (!isset($data)) {
     redirect('login');
 }
+function TanggalIndo($date)
+{
+    $BulanIndo = array("Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember");
+
+    $tahun = substr($date, 0, 4);
+    $bulan = substr($date, 5, 2);
+    $tgl   = substr($date, 8, 2);
+
+    $result = $tgl . " " . $BulanIndo[(int)$bulan - 1] . " " . $tahun;
+    return ($result);
+}
 ?>
 <!doctype html>
 <html lang="en">
@@ -30,11 +41,14 @@ if (!isset($data)) {
                 <li class="nav-item">
                     <a class="nav-link" href="<?= base_url() . 'kasir' ?>">Home <span class="sr-only">(current)</span></a>
                 </li>
+                <?php
+                foreach ($jumlah as $jumlas)
+                    ?>
                 <li class="nav-item">
-                    <a class="nav-link active" href="<?= base_url() . 'kasir/pemesanan' ?>">Pemesanan</a>
+                    <a class="nav-link active" href="<?= base_url() . 'kasir/pemesanan' ?>">Pemesanan <span class="badge badge-danger badge-counter"> <?= $jumlas->counts ?></span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="<?= base_url() . 'kasir/cart' ?>">Cart <i class='fas fa-shopping-cart '></i> <span class="badge badge-danger badge-counter"><?= count($this->cart->contents()); ?></span></a>
+                    <a class="nav-link" href="<?= base_url() . 'kasir/cart' ?>">Cart <span class="badge badge-danger badge-counter"> <?= count($this->cart->contents()); ?></span></a>
                 </li>
 
             </ul>
@@ -70,8 +84,8 @@ if (!isset($data)) {
                             <tr>
                                 <td><?= $no++ ?></td>
                                 <td><?= $item->nama_pelanggan ?></td>
-                                <td><?= $item->tanggal_pesan ?></td>
-                                <td><?= $item->tanggal_tenggang ?></td>
+                                <td><?= TanggalIndo($item->tanggal_pesan) ?></td>
+                                <td><?= TanggalIndo($item->tanggal_tenggang) ?></td>
                                 <td><?= $item->no_hp ?></td>
                                 <td>2011/04/25</td>
                                 <td><a href="<?= base_url() . 'kasir/detailPemesanan' ?>/<?= $item->id_pemesanan ?>" class="btn btn-primary">Detail</a></td>

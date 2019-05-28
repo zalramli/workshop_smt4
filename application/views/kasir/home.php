@@ -38,11 +38,14 @@ if (!isset($data)) {
                 <li class="nav-item active">
                     <a class="nav-link" href="<?= base_url() . 'kasir' ?>">Home <span class="sr-only">(current)</span></a>
                 </li>
+                <?php
+                foreach ($jumlah as $jumlas)
+                    ?>
                 <li class="nav-item">
-                    <a class="nav-link" href="<?= base_url() . 'kasir/pemesanan' ?>">Pemesanan</a>
+                    <a class="nav-link active" href="<?= base_url() . 'kasir/pemesanan' ?>">Pemesanan <span class="badge badge-danger badge-counter"> <?= $jumlas->counts ?></span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="<?= base_url() . 'kasir/cart' ?>">Cart <i class='fas fa-shopping-cart '></i> <span class="badge badge-danger badge-counter"><?= count($this->cart->contents()); ?></span></a>
+                    <a class="nav-link" href="<?= base_url() . 'kasir/cart' ?>">Cart <span class="badge badge-danger badge-counter"> <?= count($this->cart->contents()); ?></span></a>
                 </li>
 
             </ul>

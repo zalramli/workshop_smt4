@@ -3,6 +3,17 @@ $data = $this->session->userdata("nama");
 if (!isset($data)) {
     redirect('login');
 }
+function TanggalIndo($date)
+{
+    $BulanIndo = array("Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember");
+
+    $tahun = substr($date, 0, 4);
+    $bulan = substr($date, 5, 2);
+    $tgl   = substr($date, 8, 2);
+
+    $result = $tgl . " " . $BulanIndo[(int)$bulan - 1] . " " . $tahun;
+    return ($result);
+}
 ?>
 <!doctype html>
 <html lang="en">
@@ -29,11 +40,14 @@ if (!isset($data)) {
                 <li class="nav-item">
                     <a class="nav-link" href="<?= base_url() . 'kasir' ?>">Home <span class="sr-only">(current)</span></a>
                 </li>
+                <?php
+                foreach ($jumlah as $jumlas)
+                    ?>
                 <li class="nav-item">
-                    <a class="nav-link active" href="<?= base_url() . 'kasir/pemesanan' ?>">Pemesanan</a>
+                    <a class="nav-link active" href="<?= base_url() . 'kasir/pemesanan' ?>">Pemesanan <span class="badge badge-danger badge-counter"> <?= $jumlas->counts ?></span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="<?= base_url() . 'kasir/cart' ?>">Cart <i class='fas fa-shopping-cart '></i> <span class="badge badge-danger badge-counter"><?= count($this->cart->contents()); ?></span></a>
+                    <a class="nav-link" href="<?= base_url() . 'kasir/cart' ?>">Cart <span class="badge badge-danger badge-counter"> <?= count($this->cart->contents()); ?></span></a>
                 </li>
 
             </ul>
@@ -46,41 +60,56 @@ if (!isset($data)) {
     <div class="container">
         <div class="row mt-3">
             <div class="col-md-12">
-                <center>
-                    <h2>Detail Pesanan</h2>
-                </center>
-                <?php
-                foreach ($pelanggan as $items) {
-                    ?>
-                    <h5>Nama pemesan : <?= $items->nama_pelanggan ?></h5>
-                    <h5>Tanggal pesan :<?= $items->tanggal_pesan ?> - <?= $items->tanggal_pesan ?></h5>
-                <?php } ?>
-                <table class="table table-borderless">
-                    <thead>
-                        <tr>
-                            <th scope="col">No</th>
-                            <th scope="col">Kategori</th>
-                            <th scope="col">Nama Merk</th>
-                            <th scope="col">Nama Barang</th>
-                            <th scope="col">Jumlah</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php
-                        $no = 1;
-                        foreach ($detail as $item) {
-                            ?>
-                            <tr>
-                                <th scope="row"><?= $no++ ?></th>
-                                <td><?= $item->nama_kategori ?></td>
-                                <td><?= $item->nama_merk ?></td>
-                                <td><?= $item->nama_barang ?></td>
-                                <td><?= $item->jumlah ?></td>
-                            </tr>
-                        <?php } ?>
-                    </tbody>
-                </table>
+                <div class="card shadow mb-4">
 
+                    <div class="card-body">
+                        <a href="<?= base_url() . 'kasir/pemesanan'; ?>" class="btn btn-primary">Kembali</a>
+                        <center>
+                            <h2>Detail Pesanan</h2>
+                        </center>
+                        <?php
+                        foreach ($pelanggan as $items) {
+                            ?>
+                            <h5>Nama pemesan : <?= $items->nama_pelanggan ?></h5>
+                            <h5>Tanggal pesan &nbsp&nbsp: <?= TanggalIndo($items->tanggal_pesan) ?> - <?= TanggalIndo($items->tanggal_pesan) ?></h5>
+                        <?php } ?>
+                        <table class="table table-borderless">
+                            <thead>
+                                <tr>
+                                    <th scope="col">No</th>
+                                    <th scope="col">Kategori</th>
+                                    <th scope="col">Nama Merk</th>
+                                    <th scope="col">Nama Barang</th>
+                                    <th scope="col">Jumlah</th>
+                                    <th scope="col">Harga</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php
+                                $no = 1;
+                                foreach ($detail as $item) {
+                                    ?>
+                                    <tr>
+                                        <th scope="row"><?= $no++ ?></th>
+                                        <td><?= $item->nama_kategori ?></td>
+                                        <td><?= $item->nama_merk ?></td>
+                                        <td><?= $item->nama_barang ?></td>
+                                        <td><?= $item->jumlah ?></td>
+                                        <td><?= $item->jumlah * $item->harga ?></td>
+                                    </tr>
+                                <?php } ?>
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <th></th>
+                                    <th><a href="" class="btn btn-primary">Proses</a></th>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
