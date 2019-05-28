@@ -49,8 +49,11 @@ if (!isset($data)) {
                 </li>
 
             </ul>
-            <span class="navbar-text">
-                NAMA USER
+            <span style="margin-right:400px" class="navbar-text text-white">
+                Kasir : <?php echo $this->session->userdata("nama"); ?>
+            </span>
+            <span class="navbar-text text-white">
+                <a href="<?php echo base_url() . 'welcome/logout'; ?>">Logout</a>
             </span>
         </div>
     </nav>

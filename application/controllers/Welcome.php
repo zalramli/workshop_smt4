@@ -55,7 +55,11 @@ class Welcome extends CI_Controller
 
 			$this->session->set_userdata($data_session);
 
-			redirect(base_url("dashboard"));
+			if ($this->session->userdata("akses") == 'Admin') {
+				redirect('dashboard');
+			} else {
+				redirect('kasir');
+			}
 		} else {
 			$link_address = 'http://localhost/workshop_smt4/';
 			echo "Username dan password salah <a href='" . $link_address . "'>Kembali</a>";

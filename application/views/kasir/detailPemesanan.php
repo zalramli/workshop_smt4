@@ -52,7 +52,7 @@ function TanggalIndo($date)
 
             </ul>
             <span class="navbar-text">
-                NAMA USER
+                <?php echo $this->session->userdata("nama"); ?>
             </span>
         </div>
     </nav>
