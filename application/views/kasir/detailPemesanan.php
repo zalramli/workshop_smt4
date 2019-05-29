@@ -106,7 +106,7 @@ function TanggalIndo($date)
                                     <th></th>
                                     <th>
                                         <form method="post" action="<?= base_url() . 'kasir/prosesPemesanan' ?>">
-                                            <input name="id_pemesanan" type="text" value="<?= $this->uri->segment(3) ?>">
+                                            <input name="id_pemesanan" type="hidden" value="<?= $this->uri->segment(3) ?>">
                                             <button type="submit" class="btn btn-primary">Proses</button>
                                         </form>
                                     </th>

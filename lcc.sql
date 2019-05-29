@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: 27 Apr 2019 pada 19.18
--- Versi Server: 10.1.38-MariaDB-0ubuntu0.18.04.1
--- PHP Version: 7.2.15-0ubuntu0.18.04.2
+-- Generation Time: May 29, 2019 at 10:08 AM
+-- Server version: 10.1.38-MariaDB-0ubuntu0.18.04.1
+-- PHP Version: 7.2.17-0ubuntu0.18.04.1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -23,21 +23,29 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tbl_akun`
+-- Table structure for table `tbl_akun`
 --
 
 CREATE TABLE `tbl_akun` (
   `id_akun` varchar(8) NOT NULL,
-  `username` int(11) NOT NULL,
-  `password` int(11) NOT NULL,
-  `akses` int(11) NOT NULL,
+  `username` varchar(50) NOT NULL,
+  `password` varchar(50) NOT NULL,
+  `akses` varchar(50) NOT NULL,
   `id_user` varchar(8) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `tbl_akun`
+--
+
+INSERT INTO `tbl_akun` (`id_akun`, `username`, `password`, `akses`, `id_user`) VALUES
+('AKN001', 'fahri', 'fahri', 'Admin', 'PGW003'),
+('AKN002', 'dani', 'dani', 'Kasir', 'PGW004');
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tbl_barang`
+-- Table structure for table `tbl_barang`
 --
 
 CREATE TABLE `tbl_barang` (
@@ -53,17 +61,20 @@ CREATE TABLE `tbl_barang` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `tbl_barang`
+-- Dumping data for table `tbl_barang`
 --
 
 INSERT INTO `tbl_barang` (`id_barang`, `nama_barang`, `foto`, `stok_real`, `stok_sementara`, `harga`, `deskripsi`, `id_kategori`, `id_merk`) VALUES
-('BRG001', 'Asus XM123', '', 0, 0, 20000, '', '', ''),
-('BRG002', 'Acer Aspire 0213', '', 0, 0, 50000, '', '', '');
+('BRG001', 'Lenovo Ideapad 330', 'lenovo.png', 2, 0, 3500000, 'barang muluss', 'KTG001', 'MRK001'),
+('BRG002', 'Acer Aspire e15', 'asus.png', 1, 0, 5200000, 'Awet', 'KTG001', 'MRK001'),
+('BRG003', 'Redmi Note 7', 'dd.jpg', 4, 0, 2000000, 'asd', 'KTG002', 'MRK004'),
+('BRG004', 'V15 Pro', 'vivo.jpg', 4, 0, 3400000, 'asd', 'KTG002', 'MRK005'),
+('BRG005', 'Headset', 'pic72.png', 18, 0, 29000, 'baru', 'KTG003', 'MRK004');
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tbl_chatting`
+-- Table structure for table `tbl_chatting`
 --
 
 CREATE TABLE `tbl_chatting` (
@@ -77,7 +88,7 @@ CREATE TABLE `tbl_chatting` (
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tbl_jabatan`
+-- Table structure for table `tbl_jabatan`
 --
 
 CREATE TABLE `tbl_jabatan` (
@@ -85,10 +96,20 @@ CREATE TABLE `tbl_jabatan` (
   `nama_jabatan` varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `tbl_jabatan`
+--
+
+INSERT INTO `tbl_jabatan` (`id_jabatan`, `nama_jabatan`) VALUES
+('JBT001', 'Owner'),
+('JBT002', 'Kasir'),
+('JBT003', 'Admin'),
+('JBT004', 'Marketing');
+
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tbl_kategori`
+-- Table structure for table `tbl_kategori`
 --
 
 CREATE TABLE `tbl_kategori` (
@@ -97,17 +118,18 @@ CREATE TABLE `tbl_kategori` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `tbl_kategori`
+-- Dumping data for table `tbl_kategori`
 --
 
 INSERT INTO `tbl_kategori` (`id_kategori`, `nama_kategori`) VALUES
 ('KTG001', 'Laptop'),
-('KTG002', 'Smartphone');
+('KTG002', 'Smartphone'),
+('KTG003', 'Aksesoris');
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tbl_merk`
+-- Table structure for table `tbl_merk`
 --
 
 CREATE TABLE `tbl_merk` (
@@ -115,10 +137,22 @@ CREATE TABLE `tbl_merk` (
   `nama_merk` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `tbl_merk`
+--
+
+INSERT INTO `tbl_merk` (`id_merk`, `nama_merk`) VALUES
+('MRK001', 'Asus'),
+('MRK002', 'Acer'),
+('MRK003', 'Lenovo'),
+('MRK004', 'Xiaomi'),
+('MRK005', 'Vivo'),
+('MRK006', 'Oppo');
+
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tbl_pegawai`
+-- Table structure for table `tbl_pegawai`
 --
 
 CREATE TABLE `tbl_pegawai` (
@@ -129,10 +163,20 @@ CREATE TABLE `tbl_pegawai` (
   `id_jabatan` varchar(8) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `tbl_pegawai`
+--
+
+INSERT INTO `tbl_pegawai` (`id_pegawai`, `nama_pegawai`, `alamat`, `no_hp`, `id_jabatan`) VALUES
+('PGW001', 'Ali Rahmatullah', 'Randu Agung', '0852334123214', 'JBT003'),
+('PGW002', 'Rizkika Zakka', 'Kunir Lumajang', '0888123234122', 'JBT004'),
+('PGW003', 'Fahriansyah', 'Probolinggo', '0871273517352', 'JBT003'),
+('PGW004', 'Dani Ardiansyah', 'Jember', '087125757125', 'JBT002');
+
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tbl_pelanggan`
+-- Table structure for table `tbl_pelanggan`
 --
 
 CREATE TABLE `tbl_pelanggan` (
@@ -143,24 +187,67 @@ CREATE TABLE `tbl_pelanggan` (
   `no_hp` varchar(15) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `tbl_pelanggan`
+--
+
+INSERT INTO `tbl_pelanggan` (`id_pelanggan`, `nama_pelanggan`, `email`, `alamat`, `no_hp`) VALUES
+('PLG001', 'Prayitno', 'prayit@gmail.com', 'politeknik jember', '0836276372812'),
+('PLG002', 'Supardi', 'zaldolphin@gmail.com', 'Lumajang', '08362763728'),
+('PLG003', 'Hariono', 'github.little@gmail.com', 'politeknik jember', '08362763728'),
+('PLG004', 'Alfan', 'alfan@gmail.com', 'Jember', '082234641698'),
+('PLG005', 'github', 'github@gmail.com', 'klakah', '9000'),
+('PLG006', 'asd', 'alfan@gmail.com', 'klakah', '08871293');
+
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tbl_pemesanan`
+-- Table structure for table `tbl_pemesanan`
 --
 
 CREATE TABLE `tbl_pemesanan` (
   `id_pemesanan` varchar(8) NOT NULL,
   `tanggal_pesan` date NOT NULL,
   `tanggal_tenggang` date NOT NULL,
-  `id_barang` varchar(8) NOT NULL,
+  `status` varchar(10) NOT NULL,
   `id_pelanggan` varchar(8) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `tbl_pemesanan`
+--
+
+INSERT INTO `tbl_pemesanan` (`id_pemesanan`, `tanggal_pesan`, `tanggal_tenggang`, `status`, `id_pelanggan`) VALUES
+('PMS001', '2019-05-27', '2019-05-28', 'belum', 'PLG001'),
+('PMS002', '2019-05-27', '2019-05-28', 'belum', 'PLG002');
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tbl_transaksi`
+-- Table structure for table `tbl_pemesanandetail`
+--
+
+CREATE TABLE `tbl_pemesanandetail` (
+  `id_detail` int(11) NOT NULL,
+  `id_pemesanan` varchar(8) NOT NULL,
+  `id_barang` varchar(8) NOT NULL,
+  `jumlah` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `tbl_pemesanandetail`
+--
+
+INSERT INTO `tbl_pemesanandetail` (`id_detail`, `id_pemesanan`, `id_barang`, `jumlah`) VALUES
+(1, 'PMS001', 'BRG001', 1),
+(2, 'PMS001', 'BRG002', 1),
+(3, 'PMS002', 'BRG003', 1),
+(4, 'PMS002', 'BRG004', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_transaksi`
 --
 
 CREATE TABLE `tbl_transaksi` (
@@ -173,10 +260,18 @@ CREATE TABLE `tbl_transaksi` (
   `id_pelanggan` varchar(8) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `tbl_transaksi`
+--
+
+INSERT INTO `tbl_transaksi` (`id_transaksi`, `tanggal`, `total_harga`, `total_bayar`, `total_kembalian`, `id_pegawai`, `id_pelanggan`) VALUES
+('TRS001', '2019-05-29', 5500000, 5000, 500, 'PGW001', 'PLG005'),
+('TRS002', '2019-05-29', 8600000, 5000, 500, 'PGW001', 'PLG006');
+
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tbl_transaksidetail`
+-- Table structure for table `tbl_transaksidetail`
 --
 
 CREATE TABLE `tbl_transaksidetail` (
@@ -186,6 +281,16 @@ CREATE TABLE `tbl_transaksidetail` (
   `qty` int(11) NOT NULL,
   `total_hrg` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `tbl_transaksidetail`
+--
+
+INSERT INTO `tbl_transaksidetail` (`id_detail`, `id_transaksi`, `id_barang`, `qty`, `total_hrg`) VALUES
+(1, 'TRS001', 'BRG001', 1, 3500000),
+(2, 'TRS001', 'BRG003', 1, 2000000),
+(3, 'TRS002', 'BRG002', 1, 5200000),
+(4, 'TRS002', 'BRG004', 1, 3400000);
 
 --
 -- Indexes for dumped tables
@@ -247,12 +352,19 @@ ALTER TABLE `tbl_pelanggan`
 --
 ALTER TABLE `tbl_pemesanan`
   ADD PRIMARY KEY (`id_pemesanan`),
-  ADD KEY `id_barang` (`id_barang`,`id_pelanggan`);
+  ADD KEY `id_barang` (`id_pelanggan`);
+
+--
+-- Indexes for table `tbl_pemesanandetail`
+--
+ALTER TABLE `tbl_pemesanandetail`
+  ADD PRIMARY KEY (`id_detail`);
 
 --
 -- Indexes for table `tbl_transaksi`
 --
 ALTER TABLE `tbl_transaksi`
+  ADD PRIMARY KEY (`id_transaksi`),
   ADD KEY `id_pegawai` (`id_pegawai`,`id_pelanggan`),
   ADD KEY `id_pegawai_2` (`id_pegawai`,`id_pelanggan`);
 
@@ -272,10 +384,15 @@ ALTER TABLE `tbl_transaksidetail`
 ALTER TABLE `tbl_chatting`
   MODIFY `id_pesan` int(11) NOT NULL AUTO_INCREMENT;
 --
+-- AUTO_INCREMENT for table `tbl_pemesanandetail`
+--
+ALTER TABLE `tbl_pemesanandetail`
+  MODIFY `id_detail` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+--
 -- AUTO_INCREMENT for table `tbl_transaksidetail`
 --
 ALTER TABLE `tbl_transaksidetail`
-  MODIFY `id_detail` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_detail` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
