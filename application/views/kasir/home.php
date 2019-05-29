@@ -3,6 +3,12 @@ $data = $this->session->userdata("nama");
 if (!isset($data)) {
     redirect('login');
 }
+function format_ribuan($nilai)
+{
+    $n = number_format($nilai, 0, ',', ',');
+    $m = "" . $n;
+    return $m;
+}
 ?>
 <!doctype html>
 <html lang="en">
@@ -144,7 +150,7 @@ if (!isset($data)) {
                                         <div class="card-body">
                                             <h5 class="card-title text-center"><?= $item['nama_barang'] ?></h5>
                                             <p class="card-text">
-                                                <h5 class="text-primary">Rp. <?= $item['harga'] ?> </h5>
+                                                <h5 class="text-primary">Rp. <?= format_ribuan($item['harga']) ?> </h5>
                                             </p>
                                             <div class="text-center">
                                                 <input type="hidden" name="id" value="<?php echo $item['id_barang']; ?>" />
