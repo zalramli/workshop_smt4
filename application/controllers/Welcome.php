@@ -38,18 +38,16 @@ class Welcome extends CI_Controller
 		$cek = $this->m_transaksi->cek_login('tbl_akun', $where);
 		if ($cek->num_rows() > 0) {
 			foreach ($cek->result() as $row) {
-				$username = $row->username;
 				$akses = $row->akses;
 				$password = $row->password;
-				$id_akun = $row->id_akun;
+				$id_pegawai = $row->id_user;
 			}
 
 			$data_session = array(
 				'nama' => $this->input->post('username'),
 				'akses' => $akses,
-				'username' => $username,
+				'pegawai' => $id_pegawai,
 				'password' => $password,
-				'id_user' => $id_akun,
 				'status' => "login"
 			);
 

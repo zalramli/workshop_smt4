@@ -37,7 +37,7 @@ function TanggalIndo($date)
         </button>
         <div class="collapse navbar-collapse" id="navbarText">
             <ul class="navbar-nav mr-auto">
-                <li class="nav-item">
+                <li class="nav-item active">
                     <a class="nav-link" href="<?= base_url() . 'kasir' ?>">Home <span class="sr-only">(current)</span></a>
                 </li>
                 <?php
@@ -51,8 +51,11 @@ function TanggalIndo($date)
                 </li>
 
             </ul>
-            <span class="navbar-text">
-                <?php echo $this->session->userdata("nama"); ?>
+            <span style="margin-right:400px" class="navbar-text text-white">
+                Kasir : <?php echo $this->session->userdata("nama"); ?>
+            </span>
+            <span class="navbar-text text-white">
+                <a href="<?php echo base_url() . 'welcome/logout'; ?>">Logout</a>
             </span>
         </div>
     </nav>
@@ -72,47 +75,50 @@ function TanggalIndo($date)
                             ?>
                             <h5>Nama pemesan : <?= $items->nama_pelanggan ?></h5>
                             <h5>Tanggal pesan &nbsp&nbsp: <?= TanggalIndo($items->tanggal_pesan) ?> - <?= TanggalIndo($items->tanggal_pesan) ?></h5>
-                        <?php } ?>
-                        <table class="table table-borderless">
-                            <thead>
-                                <tr>
-                                    <th scope="col">No</th>
-                                    <th scope="col">Kategori</th>
-                                    <th scope="col">Nama Merk</th>
-                                    <th scope="col">Nama Barang</th>
-                                    <th scope="col">Jumlah</th>
-                                    <th scope="col">Harga</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php
-                                $no = 1;
-                                foreach ($detail as $item) {
-                                    ?>
+                            <table class="table table-borderless">
+                                <thead>
                                     <tr>
-                                        <th scope="row"><?= $no++ ?></th>
-                                        <td><?= $item->nama_kategori ?></td>
-                                        <td><?= $item->nama_merk ?></td>
-                                        <td><?= $item->nama_barang ?></td>
-                                        <td><?= $item->jumlah ?></td>
-                                        <td><?= $item->jumlah * $item->harga ?></td>
+                                        <th scope="col">No</th>
+                                        <th scope="col">Kategori</th>
+                                        <th scope="col">Nama Merk</th>
+                                        <th scope="col">Nama Barang</th>
+                                        <th scope="col">Jumlah</th>
+                                        <th scope="col">Harga</th>
                                     </tr>
-                                <?php } ?>
-                                <tr>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <th></th>
-                                    <th>
-                                        <form method="post" action="<?= base_url() . 'kasir/prosesPemesanan' ?>">
-                                            <input name="id_pemesanan" type="hidden" value="<?= $this->uri->segment(3) ?>">
-                                            <button type="submit" class="btn btn-primary">Proses</button>
-                                        </form>
-                                    </th>
-                                </tr>
-                            </tbody>
-                        </table>
+                                </thead>
+                                <tbody>
+                                    <?php
+                                    $no = 1;
+                                    foreach ($detail as $item) {
+                                        ?>
+                                        <tr>
+                                            <th scope="row"><?= $no++ ?></th>
+                                            <td><?= $item->nama_kategori ?></td>
+                                            <td><?= $item->nama_merk ?></td>
+                                            <td><?= $item->nama_barang ?></td>
+                                            <td><?= $item->jumlah ?></td>
+                                            <td><?= $item->jumlah * $item->harga ?></td>
+                                        </tr>
+                                    <?php } ?>
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <th></th>
+                                        <th>
+                                            <form method="post" action="<?= base_url() . 'kasir/prosesPemesanan' ?>">
+                                                <input name="id_pemesanan" type="hidden" value="<?= $this->uri->segment(3) ?>">
+                                                <input name="id_pelanggan" type="hidden" value="<?= $items->id_pelanggan ?>">
+                                                <input name="id_pegawai" type="hidden" value="<?php echo $this->session->userdata("pegawai"); ?>">
+                                                <button type="submit" class="btn btn-primary">Proses</button>
+                                            </form>
+                                        </th>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        <?php } ?>
+
                     </div>
                 </div>
             </div>

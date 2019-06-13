@@ -48,7 +48,6 @@ if (!isset($data)) {
             </span>
         </div>
     </nav>
-
     <div class="container mt-3">
         <div class="row ">
             <div class="col-4">
@@ -120,68 +119,21 @@ if (!isset($data)) {
             </div>
             <div class="col-7 offset-1">
                 <div class="row">
-                    <div class="col-md-12">
-                        <?php
-                        $grand_total = 0;
-                        if ($cart = $this->cart->contents()) {
-                            foreach ($cart as $item) {
-                                $grand_total = $grand_total + $item['subtotal'];
-                            }
-                            echo "<h4>Total Belanja: Rp." . number_format($grand_total, 0, ",", ".") . "</h4>";
-                            ?>
-                            <center>
-                                <h2>Konfirmasi Checkout</h2>
-                            </center>
-                            <form class="form-horizontal" action="<?php echo base_url() ?>kasir/proses_transaksi" method="post" name="frmCO" id="frmCO">
-                                <input type="hidden" class="form-control" name="id_pelanggan" id="email" placeholder="Email" value="<?= $pelanggan ?>">
-                                <input type="hidden" class="form-control" name="id_transaksi" id="email" placeholder="Email" value="<?= $transaksi ?>">
-                                <input name="id_pegawai" type="hidden" value="<?php echo $this->session->userdata("pegawai"); ?>">
-                                <div class="form-group  has-success has-feedback">
-                                    <label class="control-label col-xs-3" for="inputEmail">Nama :</label>
-                                    <div class="col-xs-9">
-                                        <input type="text" class="form-control" name="nama" id="email" placeholder="Nama">
-                                    </div>
-                                </div>
-                                <div class="form-group  has-success has-feedback">
-                                    <label class="control-label col-xs-3" for="firstName">Email :</label>
-                                    <div class="col-xs-9">
-                                        <input type="text" class="form-control" name="email" id="nama" placeholder="Email Lengkap">
-                                    </div>
-                                </div>
-                                <div class="form-group  has-success has-feedback">
-                                    <label class="control-label col-xs-3" for="lastName">Alamat :</label>
-                                    <div class="col-xs-9">
-                                        <input type="text" class="form-control" name="alamat" id="alamat" placeholder="Alamat">
-                                    </div>
-                                </div>
-                                <div class="form-group  has-success has-feedback">
-                                    <label class="control-label col-xs-3" for="phoneNumber">Telp :</label>
-                                    <div class="col-xs-9">
-                                        <input type="tel" class="form-control" name="telp" id="telp" placeholder="No Telp">
-                                    </div>
-                                </div>
-
-                                <div class="form-group  has-success has-feedback">
-                                    <div class="col-xs-offset-3 col-xs-9">
-                                        <button type="submit" class="btn btn-primary">Simpan</button>
-                                    </div>
-                                </div>
-                            </form>
-                        <?php
-                    } else {
-                        echo "<h5>Shopping Cart masih kosong</h5>";
-                    }
-                    ?>
+                    <div class="alert alert-success" role="alert">
+                        <h4 class="alert-heading">Transaksi sukses</h4>
+                        <p>Aww yeah, you successfully read this important alert message. This example text is going to run a bit longer so that you can see how spacing within an alert works with this kind of content.</p>
+                        <hr>
+                        <p class="mb-0"><a href="<?= base_url() . 'kasir' ?>" class="btn btn-primary">Transaksi lagi</a></p>
                     </div>
+
                 </div>
             </div>
-        </div>
 
-        <!-- Optional JavaScript -->
-        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+            <!-- Optional JavaScript -->
+            <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+            <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+            <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 </body>
 
 </html>

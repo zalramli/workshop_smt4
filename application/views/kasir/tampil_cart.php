@@ -33,15 +33,18 @@ if (!isset($data)) {
                 foreach ($jumlah as $jumlas)
                     ?>
                 <li class="nav-item">
-                    <a class="nav-link active" href="<?= base_url() . 'kasir/pemesanan' ?>">Pemesanan <span class="badge badge-danger badge-counter"> <?= $jumlas->counts ?></span></a>
+                    <a class="nav-link" href="<?= base_url() . 'kasir/pemesanan' ?>">Pemesanan <span class="badge badge-danger badge-counter"> <?= $jumlas->counts ?></span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="<?= base_url() . 'kasir/cart' ?>">Cart <span class="badge badge-danger badge-counter"> <?= count($this->cart->contents()); ?></span></a>
+                    <a class="nav-link active" href="<?= base_url() . 'kasir/cart' ?>">Cart <span class="badge badge-danger badge-counter"> <?= count($this->cart->contents()); ?></span></a>
                 </li>
 
             </ul>
-            <span class="navbar-text">
-                <?php echo $this->session->userdata("nama"); ?>
+            <span style="margin-right:400px" class="navbar-text text-white">
+                Kasir : <?php echo $this->session->userdata("nama"); ?>
+            </span>
+            <span class="navbar-text text-white">
+                <a href="<?php echo base_url() . 'welcome/logout'; ?>">Logout</a>
             </span>
         </div>
     </nav>
