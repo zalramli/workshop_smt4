@@ -136,7 +136,7 @@ if (!isset($data)) {
                                     <h2>Pembayaran</h2>
                                 </center>
 
-                                <form class="form-horizontal" action="<?php echo base_url() ?>kasir/proses_transaksi" method="post" name="frmCO" id="frmCO">
+                                <form class="form-horizontal" action="<?php echo base_url() ?>kasir/prosesPemesananAkhir" method="post" name="frmCO" id="frmCO">
                                     <div class="form-group  has-success has-feedback">
                                         <label class="control-label col-xs-3" for="lastName">Bayar :</label>
                                         <div class="col-xs-9">
@@ -146,16 +146,18 @@ if (!isset($data)) {
                                     <div class="form-group  has-success has-feedback">
                                         <label class="control-label col-xs-3" for="lastName">Kembalian :</label>
                                         <div class="col-xs-9">
-                                            <input type="text" class="form-control" name="kembalian" id="alamat" readonly>
+                                            <input type="text" class="form-control" name="kembalian" id="alamat" value="2000" readonly>
                                         </div>
                                     </div>
 
                             </div>
                             <div class="col-md-6">
                                 <h2>Biodata Pelanggan</h2>
-                                <input type="text" class="form-control" name="id_pelanggan" id="email" placeholder="Email" value="asd">
+                                <input type="hidden" class="form-control" name="id_pelanggan" id="email" placeholder="Email" value="<?= $id_pelanggan ?>">
                                 <input type="hidden" class="form-control" name="id_transaksi" id="email" placeholder="Email" value="<?= $transaksi ?>">
+                                <input type="hidden" class="form-control" name="id_pemesanan" id="email" placeholder="Email" value="<?= $pemesanan[0]['id_pemesanan'] ?>">
                                 <input name="id_pegawai" type="hidden" value="<?php echo $this->session->userdata("pegawai"); ?>">
+
                                 <div class="form-group  has-success has-feedback">
                                     <label class="control-label col-xs-3" for="inputEmail">Nama :</label>
                                     <div class="col-xs-9">
@@ -209,7 +211,7 @@ if (!isset($data)) {
                                     <div class="form-group  has-success has-feedback">
                                         <label class="control-label col-xs-3" for="lastName">Kembalian :</label>
                                         <div class="col-xs-9">
-                                            <input type="text" class="form-control" name="kembalian" id="alamat" readonly>
+                                            <input type="text" class="form-control" name="kembalian" value="2000" id="alamat" readonly>
                                         </div>
                                     </div>
                             </div>
