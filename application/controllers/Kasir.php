@@ -238,4 +238,22 @@ class Kasir extends CI_Controller
         $this->cart->destroy();
         redirect('kasir/sukses');
     }
+    public function nota()
+    {
+        $sql = $this->db->query("SELECT * FROM tbl_transaksi JOIN tbl_pelanggan USING(id_pelanggan) JOIN tbl_pegawai USING(id_pegawai) ORDER BY id_transaksi DESC LIMIT 1 ");
+        $data['data_transaksi'] = $sql->result();
+        $html = $this->load->view('kasir/nota', $data, true);
+
+        //this the the PDF filename that user will get to download
+        $pdfFilePath = "nota.pdf";
+
+        //load mPDF library
+        $this->load->library('m_pdf');
+        ob_start();
+        //generate the PDF from the given html
+        $this->m_pdf->pdf->WriteHTML($html);
+
+        //download it.
+        $this->m_pdf->pdf->Output($pdfFilePath, "I");
+    }
 }

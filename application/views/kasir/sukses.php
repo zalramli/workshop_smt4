@@ -121,9 +121,10 @@ if (!isset($data)) {
                 <div class="row">
                     <div class="alert alert-success" role="alert">
                         <h4 class="alert-heading">Transaksi sukses</h4>
-                        <p>Aww yeah, you successfully read this important alert message. This example text is going to run a bit longer so that you can see how spacing within an alert works with this kind of content.</p>
+                        <p>Terima kasih telah berbelanja di toko kami. Apakah pelanggan butuh nota pembelian ?</p>
                         <hr>
-                        <p class="mb-0"><a href="<?= base_url() . 'kasir' ?>" class="btn btn-primary">Transaksi lagi</a></p>
+                        <a href="<?= base_url() . 'kasir/nota' ?>" class="btn btn-primary" target="_blank">Print</a>
+                        <a href="<?= base_url() . 'kasir' ?>" class="btn btn-danger">Tidak</a>
                     </div>
 
                 </div>
