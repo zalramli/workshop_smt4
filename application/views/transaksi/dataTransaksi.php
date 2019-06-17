@@ -3,6 +3,22 @@ $data = $this->session->userdata("nama");
 if (!isset($data)) {
     redirect('login');
 }
+function format_ribuan($angka)
+{
+    $hasil_rupiah = number_format($angka, 0, ',', '.');
+    return $hasil_rupiah;
+}
+function TanggalIndo($date)
+{
+    $BulanIndo = array("Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember");
+
+    $tahun = substr($date, 0, 4);
+    $bulan = substr($date, 5, 2);
+    $tgl   = substr($date, 8, 2);
+
+    $result = $tgl . " " . $BulanIndo[(int)$bulan - 1] . " " . $tahun;
+    return ($result);
+}
 ?>
 <div class="container-fluid">
     <!-- Page Heading -->
@@ -37,8 +53,8 @@ if (!isset($data)) {
                             <tr>
                                 <td><?= $item->id_transaksi ?></td>
                                 <td><?= $item->nama_pelanggan ?></td>
-                                <td><?= $item->tanggal ?></td>
-                                <td><?= $item->total_harga ?></td>
+                                <td><?= TanggalIndo($item->tanggal) ?></td>
+                                <td style="text-align:right"><?= format_ribuan($item->total_harga) ?></td>
                                 <td><?= $item->nama_pegawai ?></td>
                                 <td style="text-align:center;">
                                     <a href="<?= base_url() . 'transaksi/detail'; ?>/<?= $item->id_transaksi ?>" class="btn btn-warning">Detail</a>

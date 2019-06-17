@@ -5,11 +5,10 @@
 	}
 	?>
 	<?php
-	function format_ribuan($nilai)
+	function format_ribuan($angka)
 	{
-		$n = number_format($nilai, 0, ',', ',');
-		$m = "" . $n . ".00";
-		return $m;
+		$hasil_rupiah = number_format($angka, 0, ',', '.');
+		return $hasil_rupiah;
 	}
 	function TanggalIndo($date)
 	{

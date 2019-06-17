@@ -242,6 +242,11 @@ class Kasir extends CI_Controller
     {
         $sql = $this->db->query("SELECT * FROM tbl_transaksi JOIN tbl_pelanggan USING(id_pelanggan) JOIN tbl_pegawai USING(id_pegawai) ORDER BY id_transaksi DESC LIMIT 1 ");
         $data['data_transaksi'] = $sql->result();
+        $detail = $sql->result_array();
+        $id_trans = $detail[0]['id_transaksi'];
+        $sql2 = $this->db->query("SELECT * FROM tbl_transaksidetail JOIN tbl_barang ON tbl_transaksidetail.id_barang = tbl_barang.id_barang JOIN tbl_kategori ON tbl_barang.id_kategori=tbl_kategori.id_kategori JOIN tbl_merk ON tbl_barang.id_merk=tbl_merk.id_merk WHERE id_transaksi='$id_trans'");
+        $data['detail_transaksi'] = $sql2->result();
+
         $html = $this->load->view('kasir/nota', $data, true);
 
         //this the the PDF filename that user will get to download

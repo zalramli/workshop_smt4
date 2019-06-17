@@ -3,6 +3,11 @@ $data = $this->session->userdata("nama");
 if (!isset($data)) {
     redirect('login');
 }
+function format_ribuan($angka)
+{
+    $hasil_rupiah = number_format($angka, 0, ',', '.');
+    return $hasil_rupiah;
+}
 function TanggalIndo($date)
 {
     $BulanIndo = array("Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember");
@@ -56,7 +61,7 @@ function TanggalIndo($date)
                             <td><?= $item->nama_merk ?></td>
                             <td><?= $item->nama_barang ?></td>
                             <td><?= $item->jumlah ?></td>
-                            <td><?= $item->jumlah * $item->harga ?></td>
+                            <td style="text-align:right"><?= format_ribuan($item->jumlah * $item->harga) ?></td>
                         </tr>
                     <?php } ?>
                 </tbody>

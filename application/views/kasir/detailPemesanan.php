@@ -3,6 +3,11 @@ $data = $this->session->userdata("nama");
 if (!isset($data)) {
     redirect('login');
 }
+function format_ribuan($angka)
+{
+    $hasil_rupiah = number_format($angka, 0, ',', '.');
+    return $hasil_rupiah;
+}
 function TanggalIndo($date)
 {
     $BulanIndo = array("Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember");
@@ -82,8 +87,8 @@ function TanggalIndo($date)
                                         <th scope="col">Kategori</th>
                                         <th scope="col">Nama Merk</th>
                                         <th scope="col">Nama Barang</th>
-                                        <th scope="col">Jumlah</th>
-                                        <th scope="col">Harga</th>
+                                        <th style="text-align:center" scope="col">Jumlah</th>
+                                        <th style="text-align:center" scope="col">Harga</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -96,8 +101,8 @@ function TanggalIndo($date)
                                             <td><?= $item->nama_kategori ?></td>
                                             <td><?= $item->nama_merk ?></td>
                                             <td><?= $item->nama_barang ?></td>
-                                            <td><?= $item->jumlah ?></td>
-                                            <td><?= $item->jumlah * $item->harga ?></td>
+                                            <td style="text-align:center"><?= $item->jumlah ?></td>
+                                            <td style="text-align:right"><?= format_ribuan($item->jumlah * $item->harga) ?></td>
                                         </tr>
                                     <?php } ?>
                                     <tr>
@@ -106,7 +111,7 @@ function TanggalIndo($date)
                                         <td></td>
                                         <td></td>
                                         <th></th>
-                                        <th>
+                                        <th style="text-align:right">
                                             <form method="post" action="<?= base_url() . 'kasir/prosesPemesanan' ?>">
                                                 <input name="id_pemesanan" type="hidden" value="<?= $this->uri->segment(3) ?>">
                                                 <input name="id_pelanggan" type="hidden" value="<?= $items->id_pelanggan ?>">

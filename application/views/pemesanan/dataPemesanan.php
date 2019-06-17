@@ -33,7 +33,6 @@ function TanggalIndo($date)
                             <th>Tgl Pesan</th>
                             <th>Tgl Tenggak</th>
                             <th>No Hp</th>
-                            <th>Jumlah Barang</th>
                             <th>Detail</th>
                         </tr>
                     </thead>
@@ -48,7 +47,6 @@ function TanggalIndo($date)
                                 <td><?= TanggalIndo($item->tanggal_pesan) ?></td>
                                 <td><?= TanggalIndo($item->tanggal_tenggang) ?></td>
                                 <td><?= $item->no_hp ?></td>
-                                <td>2011/04/25</td>
                                 <td><a href="<?= base_url() . 'pemesanan/detailPemesanan' ?>/<?= $item->id_pemesanan ?>" class="btn btn-primary">Detail</a></td>
                             </tr>
                         <?php

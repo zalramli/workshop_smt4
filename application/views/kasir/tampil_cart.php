@@ -54,7 +54,7 @@ if (!isset($data)) {
             ?>
             <div class="container mt-3">
                 <div class="row">
-                    <a style="color:white;" href="<?php echo base_url() ?>kasir/check_out" class='btn btn-lg btn-warning'>Proses</a><br>
+                    <a style="color:white;" href="<?php echo base_url() ?>kasir/check_out" class='btn btn-lg btn-primary'>Proses</a><br>
                     <table width="100%" class="table mt-3">
                         <thead class="">
                             <tr>

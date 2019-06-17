@@ -1,3 +1,33 @@
+<?php
+$data = $this->session->userdata("nama");
+if (!isset($data)) {
+    redirect('login');
+}
+?>
+<?php
+function format_ribuan($angka)
+{
+    $hasil_rupiah = number_format($angka, 0, ',', '.');
+    return $hasil_rupiah;
+}
+function TanggalIndo($date)
+{
+    $BulanIndo = array("Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember");
+
+    $tahun = substr($date, 0, 4);
+    $bulan = substr($date, 5, 2);
+    $tgl   = substr($date, 8, 2);
+
+    $result = $tgl . " " . $BulanIndo[(int)$bulan - 1] . " " . $tahun;
+    return ($result);
+}
+foreach ($data_transaksi as $transaksi) {
+    $id_transaksi = $transaksi->id_transaksi;
+    $tanggal = $transaksi->tanggal;
+    $kasir = $transaksi->nama_pegawai;
+    $pelanggan = $transaksi->nama_pelanggan;
+    $total = $transaksi->total_harga;
+} ?>
 <table width="100%" style="border-collapse: collapse;">
     <tr>
         <td width="15%"></td>
@@ -14,7 +44,7 @@
         </td>
         <td width="2%"> : </td>
         <td width="10%">
-            <h5 style="font-weight:normal">TRS003</h5>
+            <h5 style="font-weight:normal"><?= $id_transaksi ?></h5>
         </td>
         <td width="40%"></td>
         <td width="25%">
@@ -27,7 +57,7 @@
         </td>
         <td width="2%"> : </td>
         <td width="10%">
-            <h5 style="font-weight:normal">12-06-2019</h5>
+            <h5 style="font-weight:normal"><?= $tanggal ?></h5>
         </td>
         <td width="40%"></td>
         <td width="25%">
@@ -39,8 +69,8 @@
             <h5>Kasir</h5>
         </td>
         <td width="2%"> : </td>
-        <td width="10%">
-            <h5 style="font-weight:normal">Syafri</h5>
+        <td width="25%">
+            <h5 style="font-weight:normal"><?= $kasir ?></h5>
         </td>
     </tr>
     <tr>
@@ -60,7 +90,7 @@
 </table><br>
 <table width="100%" style="border-collapse:collapse">
     <tr>
-        <td width="4%">
+        <td style="text-align:center" width="4%">
             <h5 style="font-weight:normal">No. </h5>
         </td>
         <td width=15%>
@@ -79,26 +109,36 @@
             <h5 style="font-weight:normal">Jumlah </h5>
         </td>
     </tr>
-    <tr>
-        <td width="4%">
-            <h5 style="font-weight:normal">1. </h5>
-        </td>
-        <td width=15%>
-            <h5 style="font-weight:normal">Laptop </h5>
-        </td>
-        <td width=35%>
-            <h5 style="font-weight:normal">Lenovo Ideapad 320s </h5>
-        </td>
-        <td style="text-align:center" width="6%">
-            <h5 style="font-weight:normal">3 </h5>
-        </td>
-        <td style="text-align:right" width="20%">
-            <h5 style=" font-weight:normal">Rp 200.000 </h5>
-        </td>
-        <td style="text-align:right" width="20%">
-            <h5 style="font-weight:normal">Rp 600.000 </h5>
-        </td>
-    </tr><br>
+    <?php
+    $no = 1;
+    foreach ($detail_transaksi as $detail) {  ?>
+        <tr>
+            <td style="text-align:center" width="4%">
+                <h5 style="font-weight:normal"><?= $no++ ?>. </h5>
+            </td>
+            <td width=15%>
+                <h5 style="font-weight:normal">
+                    <?= $detail->nama_kategori ?>
+                </h5>
+            </td>
+            <td width=35%>
+                <h5 style="font-weight:normal"><?= $detail->nama_merk . " " . $detail->nama_barang ?> </h5>
+            </td>
+            <td style="text-align:center" width="6%">
+                <h5 style="font-weight:normal"><?= $detail->qty ?> </h5>
+            </td>
+            <td style="text-align:right" width="20%">
+                <h5 style=" font-weight:normal">
+                    <?= format_ribuan($detail->harga) ?>
+                </h5>
+            </td>
+            <td style="text-align:right" width="20%">
+                <h5 style="font-weight:normal">
+                    <?= format_ribuan($detail->harga * $detail->qty) ?>
+                </h5>
+            </td>
+        </tr>
+    <?php } ?>
     <tr>
         <td style="border-bottom: 1px solid black;" width="4%">
 
@@ -125,7 +165,7 @@
             <h5 style=" font-weight:normal"><b>TOTAL</b> </h5>
         </td>
         <td style="border-bottom: 1px solid black; text-align:right" width="20%">
-            <h5 style="font-weight:normal"><b>Rp 600.000</b> </h5>
+            <h5 style="font-weight:normal"><b><?= format_ribuan($total) ?></b> </h5>
         </td>
     </tr>
 </table><br><br>
@@ -143,14 +183,14 @@
         <td width="5%"></td>
         <td style="text-align:center"></td>
         <td></td>
-    </tr><br><br><br><br><br>
+    </tr><br><br><br><br>
     <tr>
         <td width="5%"></td>
         <td style="text-align:center">
-            <h5 style="font-weight:normal">Suprahhh</h5>
+            <h5 style="font-weight:normal"><?= $pelanggan ?></h5>
         </td>
         <td style="text-align:center">
-            <h5 style="font-weight:normal">Syuprii</h5>
+            <h5 style="font-weight:normal">Pegawai, <?= $kasir  ?></h5>
         </td>
     </tr>
 </table>
