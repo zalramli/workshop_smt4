@@ -1,7 +1,10 @@
 <?php
 $data = $this->session->userdata("nama");
+$data2 = $this->session->userdata("akses");
 if (!isset($data)) {
     redirect('login');
+} else if ($data2 == "Kasir") {
+    redirect('kasir');
 }
 ?>
 <div class="container-fluid">
