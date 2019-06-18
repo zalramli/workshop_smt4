@@ -21,6 +21,10 @@ function format_ribuan($nilai)
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+
+    <!-- Custom styles for this template-->
+    <link href="<?= base_url(); ?>assets/css/sb-admin-2.min.css" rel="stylesheet">
+
     <title>Hello, world!</title>
 </head>
 <style>
@@ -33,7 +37,7 @@ function format_ribuan($nilai)
     }
 </style>
 
-<body>
+<body id="page-top">
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
         <a class="navbar-brand" href="#">NAMA TOKO</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
@@ -67,7 +71,7 @@ function format_ribuan($nilai)
         <div class="row">
             <div class="col-4">
                 <div class="list-group">
-                    <a class="list-group-item list-group-item-dark"><strong>KATEGORI</strong></a>
+                    <a style="text-decoration:none" href="" class="list-group-item list-group-item-dark"><strong>KATEGORI</strong></a>
                     <a style="text-decoration:none;color:black;" href="<?php echo base_url() ?>kasir/" class="list-group-item">Semua</a>
                     <?php
                     foreach ($kategori as $row) {
@@ -181,6 +185,9 @@ function format_ribuan($nilai)
                 </div>
             </div>
         </div>
+        <a class="scroll-to-top rounded" href="#page-top">
+            <i class="fas fa-angle-up"></i>
+        </a>
 
 
         <!-- Optional JavaScript -->
@@ -188,6 +195,10 @@ function format_ribuan($nilai)
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+        <script src="<?= base_url(); ?>assets/vendor/jquery/jquery.min.js"></script>
+        <!-- Custom scripts for all pages-->
+        <script src="<?= base_url(); ?>assets/js/sb-admin-2.min.js"></script>
+
 </body>
 
 </html>
