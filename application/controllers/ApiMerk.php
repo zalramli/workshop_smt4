@@ -5,7 +5,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 require APPPATH . '/libraries/REST_Controller.php';
 use Restserver\Libraries\REST_Controller;
 
-class Api extends REST_Controller
+class ApiMerk extends REST_Controller
 {
 
     function __construct($config = 'rest')
@@ -16,17 +16,8 @@ class Api extends REST_Controller
 
     function index_get()
     {
-        $id = $this->get('id_kategori');
-        if ($id == '') {
-            $kontak = $this->db->get('tbl_barang')->result();
-        } else {
-            $this->db->where('tbl_barang', $id);
-            $kontak = $this->db->get('tbl_barang')->result();
-        }
-        $this->response([
-            'status' => true,
-            'data' => $kontak
-        ], 200);
+        $merk = $this->db->get('tbl_merk')->result();
+        $this->response(array("categories" => $merk));
     }
 
     function index_post()
