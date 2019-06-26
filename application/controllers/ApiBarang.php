@@ -16,7 +16,7 @@ class ApiBarang extends REST_Controller
 
     function index_get()
     {
-        $barang = $this->db->get('tbl_barang')->result();
+        $barang = $this->db->get('api_barang')->result();
         $this->response(array("meals" => $barang));
     }
 
