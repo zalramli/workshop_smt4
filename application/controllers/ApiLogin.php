@@ -2,9 +2,10 @@
 defined('BASEPATH') or exit('No direct script access allowed');
 
 require APPPATH . '/libraries/REST_Controller.php';
+
 use Restserver\Libraries\REST_Controller;
 
-class Login extends REST_Controller
+class ApiLogin extends REST_Controller
 {
 
     function __construct($config = 'rest')
@@ -38,29 +39,24 @@ class Login extends REST_Controller
             foreach ($query->result_array() as $row) {
 
                 // dicek apakah data inputan sama dengan data di database
-                if (password_verify($password, $row["password"])) {
 
-                    // kumpulan data
-                    $data = array(
-                        'id_pelanggan' => $row["id_pelanggan"],
-                        'nama_pelanggan' => $row["nama_pelanggan"],
-                        'email' => $row["email"],
-                        'alamat' => $row["alamat"],
-                        'no_hp' => $row["no_hp"],
-                    );
+                // kumpulan data
+                $data = array(
+                    'id_pelanggan' => $row["id_pelanggan"],
+                    'nama_pelanggan' => $row["nama_pelanggan"],
+                    'email' => $row["email"],
+                    'alamat' => $row["alamat"],
+                    'no_hp' => $row["no_hp"],
+                    'username' => $row["username"],
+                    'password' => $row["password"],
+                );
 
-                    array_push($result['login'], $data);
+                array_push($result['login'], $data);
 
-                    // membuat array untuk di transfer
-                    $result["success"] = "1";
-                    $result["message"] = "success";
-                    $this->response($result, 200);
-                } else {
-                    // membuat array untuk di transfer ke API
-                    $result["success"] = "0";
-                    $result["message"] = "error password";
-                    $this->response($result, 502);
-                }
+                // membuat array untuk di transfer
+                $result["success"] = "1";
+                $result["message"] = "success";
+                $this->response($result, 200);
             }
         } else {
             // membuat array untuk di transfer ke API
