@@ -34,7 +34,7 @@ function TanggalIndo($date)
         </div>
         <div class="card-body">
             <form target="_blank" method="post" action="<?php echo base_url() . 'transaksi/print'; ?>">
-                <input type="date" name="tgl_awal"> ---
+                <input type="date" name="tgl_awal"> 
                 <input type="date" name="tgl_akhir"> &nbsp;&nbsp;&nbsp;&nbsp;
                 <button style="height:40px; margin-bottom: 3px;" class="btn btn-success"><i class="fa fa-print" style="color:white;"> </i></button>
             </form><br>

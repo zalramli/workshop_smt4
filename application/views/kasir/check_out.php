@@ -127,7 +127,8 @@ if (!isset($data)) {
                         $grand_total = $grand_total + $item['subtotal'];
                         $id_pelanggan = $item['pelanggan'];
                     }
-                    echo "<center><h4>Total Belanja: Rp." . number_format($grand_total, 0, ",", ".") . "</h4></center><br>";
+                    
+                     echo '<center>TOTAL BELANJA <input type="text" id="total" onkeyup="hitung2();" onkeyup="return isNumberKey(event)" class="form-control"value="'.$grand_total.'" readonly></center><br>';
                     if ($id_pelanggan != "kosong") {
                         ?>
                         <div class="row">
@@ -141,13 +142,13 @@ if (!isset($data)) {
                                     <div class="form-group  has-success has-feedback">
                                         <label class="control-label col-xs-3" for="lastName">Bayar :</label>
                                         <div class="col-xs-9">
-                                            <input type="text" class="form-control" name="bayar" id="alamat" placeholder="Pembayaran">
+                                            <input type="text" class="form-control" name="bayar" id="bayar" onkeyup="hitung2();" required=""  onkeyup="return isNumberKey(event)"placeholder="Pembayaran">
                                         </div>
                                     </div>
                                     <div class="form-group  has-success has-feedback">
                                         <label class="control-label col-xs-3" for="lastName">Kembalian :</label>
                                         <div class="col-xs-9">
-                                            <input type="text" class="form-control" name="kembalian" id="alamat" value="2000" readonly>
+                                            <input type="text" class="form-control" name="kembalian" id="kembalian" value="" readonly>
                                         </div>
                                     </div>
 
@@ -206,13 +207,13 @@ if (!isset($data)) {
                                     <div class="form-group  has-success has-feedback">
                                         <label class="control-label col-xs-3" for="lastName">Bayar :</label>
                                         <div class="col-xs-9">
-                                            <input type="text" class="form-control" name="bayar" id="alamat" placeholder="Pembayaran">
+                                            <input id="bayar" type="text" class="form-control" name="bayar" placeholder="Pembayaran">
                                         </div>
                                     </div>
                                     <div class="form-group  has-success has-feedback">
-                                        <label class="control-label col-xs-3" for="lastName">Kembalian :</label>
+                                        <label id="kembalian" class="control-label col-xs-3" for="lastName">Kembalian :</label>
                                         <div class="col-xs-9">
-                                            <input type="text" class="form-control" name="kembalian" value="2000" id="alamat" readonly>
+                                            <input type="text"id="kembalian" class="form-control" name="kembalian" value="" id="alamat" readonly>
                                         </div>
                                     </div>
                             </div>
@@ -266,6 +267,20 @@ if (!isset($data)) {
     </div>
     </div>
 
+<script type="text/javascript">
+    function hitung2() {
+var a = $("#total").val();
+var b = $("#bayar").val();
+c = b - a;
+$("#kembalian").val(c);
+}
+function isNumberKey(evt){
+ var charCode = (evt.which) ? evt.which : event.keyCode;
+ if (charCode != 46 && charCode > 31 && (charCode < 48 || charCode > 57))
+ return false;
+ return true;
+}
+</script>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
