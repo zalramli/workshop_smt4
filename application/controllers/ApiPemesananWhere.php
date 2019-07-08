@@ -16,7 +16,7 @@ class ApiPemesananWhere extends REST_Controller
     }
     function index_get($id)
     {
-        $pemesanan = $this->db->query("SELECT a.*, COUNT(b.id_pemesanan) AS jml_barang FROM tbl_pemesanan AS a LEFT JOIN tbl_pemesanandetail AS b USING(id_pemesanan) WHERE id_pelanggan='$id' GROUP BY a.id_pemesanan ")->result();
+        $pemesanan = $this->db->query("SELECT a.*, COUNT(b.id_pemesanan) AS jml_barang FROM tbl_pemesanan AS a LEFT JOIN tbl_pemesanandetail AS b USING(id_pemesanan) WHERE id_pelanggan='$id' GROUP BY a.id_pemesanan ORDER BY status DESC,id_pemesanan ASC")->result();
         $this->response(array('pemesanan' => $pemesanan));
     }
 }

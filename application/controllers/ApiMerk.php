@@ -17,7 +17,23 @@ class ApiMerk extends REST_Controller
 
     function index_get()
     {
-        $merk = $this->db->get('tbl_kategori')->result();
-        $this->response(array("categories" => $merk));
+        $result = array();
+        $result['categories'] = array();
+        $merk = $this->db->get('tbl_kategori');
+        foreach ($merk->result_array() as $item) {
+            $path2 = "uploads/" . $item["fotoKategori"];
+            $finalPath = "http://192.168.43.184/workshop_smt4/" . $path2;
+
+            $data = array(
+                'id_kategori' => $item["id_kategori"],
+                'nama_kategori' => $item["nama_kategori"],
+                'fotoKategori' => $finalPath,
+            );
+            array_push($result['categories'], $data);
+
+            $result['success'] = "1";
+            $result['message'] = "success";
+            $this->response($result, 200);
+        }
     }
 }
