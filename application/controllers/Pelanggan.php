@@ -16,7 +16,6 @@ class Pelanggan extends CI_Controller
     }
     public function add()
     {
-        $data['kode'] = $this->m_pelanggan->buat_kode();
         $this->form_validation->set_rules('nama_pelanggan', 'Nama Pelanggan', 'required');
         $this->form_validation->set_rules('email', 'Email', 'required|valid_email');
         $this->form_validation->set_rules('no_hp', 'No Hp', 'required|numeric');
@@ -25,7 +24,7 @@ class Pelanggan extends CI_Controller
 
             $this->load->view('template/header');
             $this->load->view('template/navbar');
-            $this->load->view('pelanggan/inputPelanggan', $data);
+            $this->load->view('pelanggan/inputPelanggan');
             $this->load->view('template/footer');
         } else {
             $this->store();
@@ -33,13 +32,11 @@ class Pelanggan extends CI_Controller
     }
     public function store()
     {
-        $id_pelanggan = $this->input->post('id_pelanggan');
         $nama_pelanggan = $this->input->post('nama_pelanggan');
         $email = $this->input->post('email');
         $no_hp = $this->input->post('no_hp');
         $alamat = $this->input->post('alamat');
         $data = array(
-            'id_pelanggan' => $id_pelanggan,
             'nama_pelanggan' => $nama_pelanggan,
             'email' => $email,
             'alamat' => $alamat,
