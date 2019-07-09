@@ -137,13 +137,7 @@ function format_ribuan($nilai)
                 </div>
             </div>
             <div class="col-8">
-                <div class="row">
-                    <div class="col-md-12">
-                        <input type="text" class="form-control" placeholder="Cari Barang"">
-
-                                                        </div>
-                                                    </div>
-                                                    <div class=" row mt-3">
+                <div class=" row mt-3">
                         <?php
                         foreach ($produk as $item) {
                             ?>
